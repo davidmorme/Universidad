@@ -1,48 +1,48 @@
-Title,Category,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges 
+Title,Category,Total In-Patient Discharges,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges 
 Title,Category,Male,Male,Male,Male,Male,Female ,Female ,Female ,Female ,Female ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges ,Total In-Patient Discharges 
-Procedure Block,,< 15,15–44,45–64,65 years and over,Total,< 15,15–44,45–64,65 years and over,Total,< 15,15–44,45–64,65 years and over,Total
+Procedure Block,,< 15,15â€“44,45â€“64,65 years and over,Total,< 15,15â€“44,45â€“64,65 years and over,Total,< 15,15â€“44,45â€“64,65 years and over,Total
 Total In-Patient Discharges,Mean,3.4,3.9,6,9.2,6.4,3.4,2.9,5.2,9.8,5.2,3.4,3.1,5.6,9.5,5.7
 Total In-Patient Discharges,Median,1,1,2,4,2,2,2,2,5,2,1,2,2,5,2
-All Principal Procedures 0001–2016,Mean,5.4,5.7,8.5,12.2,9.2,5.6,3.9,7.4,13.1,7.6,5.5,4.3,8,12.7,8.3
-All Principal Procedures 0001–2016,Median,2,2,4,7,4,2,3,4,7,4,2,3,4,7,4
-Procedures on nervous system 0001–0086,Mean,6,6.7,10.6,15,9.3,5.5,6,8.9,14.3,8.3,5.8,6.3,9.7,14.6,8.8
-Procedures on nervous system 0001–0086,Median,4,3,4,7,4,4,3,5,7,4,4,3,5,7,4
+All Principal Procedures 0001â€“2016,Mean,5.4,5.7,8.5,12.2,9.2,5.6,3.9,7.4,13.1,7.6,5.5,4.3,8,12.7,8.3
+All Principal Procedures 0001â€“2016,Median,2,2,4,7,4,2,3,4,7,4,2,3,4,7,4
+Procedures on nervous system 0001â€“0086,Mean,6,6.7,10.6,15,9.3,5.5,6,8.9,14.3,8.3,5.8,6.3,9.7,14.6,8.8
+Procedures on nervous system 0001â€“0086,Median,4,3,4,7,4,4,3,5,7,4,4,3,5,7,4
 Lumbar puncture 0030,Mean,5.4,5.4,11.9,21.1,8.8,4.9,5.9,8,20.4,8.2,5.2,5.7,9.8,20.7,8.5
 Lumbar puncture 0030,Median,4,3,6,12,4,3,3,4,12,4,4,3,5,12,4
-Procedures on endocrine system 0110–0129,Mean,6.1,4.8,4.6,9.3,6.1,9.2,3.6,3.8,5.3,4.2,7.2,3.8,4,6.5,4.7
-Procedures on endocrine system 0110–0129,Median,5,3,3,4,3,3,2,2,3,2,3,2,2,3,2
-Procedures on eye and adnexa 0160–0256,Mean,1.8,2.6,2.9,3.1,2.8,2.6,2.7,2.4,4.6,3.5,2.2,2.7,2.7,3.9,3.1
-Procedures on eye and adnexa 0160–0256,Median,1,2,2,2,2,1,2,1,2,1,1,2,2,2,2
-Lens extraction 0195–0202,Mean,1.8,1.8,2.2,2.4,2.2,1.7,2.3,1.9,4,3.4,1.7,2.1,2.1,3.2,2.8
-Lens extraction 0195–0202,Median,2,2,1,1,1,2,1,1,1,1,2,1,1,1,1
-Procedures on ear and mastoid process 0300–0333,Mean,1.4,1.8,2.6,5.4,2.2,1.4,1.8,2.9,6.9,2.3,1.4,1.8,2.8,6,2.2
-Procedures on ear and mastoid process 0300–0333,Median,1,1,2,2,1,1,1,1,3,1,1,1,2,2,1
+Procedures on endocrine system 0110â€“0129,Mean,6.1,4.8,4.6,9.3,6.1,9.2,3.6,3.8,5.3,4.2,7.2,3.8,4,6.5,4.7
+Procedures on endocrine system 0110â€“0129,Median,5,3,3,4,3,3,2,2,3,2,3,2,2,3,2
+Procedures on eye and adnexa 0160â€“0256,Mean,1.8,2.6,2.9,3.1,2.8,2.6,2.7,2.4,4.6,3.5,2.2,2.7,2.7,3.9,3.1
+Procedures on eye and adnexa 0160â€“0256,Median,1,2,2,2,2,1,2,1,2,1,1,2,2,2,2
+Lens extraction 0195â€“0202,Mean,1.8,1.8,2.2,2.4,2.2,1.7,2.3,1.9,4,3.4,1.7,2.1,2.1,3.2,2.8
+Lens extraction 0195â€“0202,Median,2,2,1,1,1,2,1,1,1,1,2,1,1,1,1
+Procedures on ear and mastoid process 0300â€“0333,Mean,1.4,1.8,2.6,5.4,2.2,1.4,1.8,2.9,6.9,2.3,1.4,1.8,2.8,6,2.2
+Procedures on ear and mastoid process 0300â€“0333,Median,1,1,2,2,1,1,1,1,3,1,1,1,2,2,1
 Myringotomy 0309,Mean,1.3,1.6,2.8,4.7,1.6,1.3,5.3,2.1,^,2.1,1.3,3.3,2.5,7.1,1.8
 Myringotomy 0309,Median,1,1,1,3,1,1,2,1,^,1,1,1,1,3,1
-"Procedures on nose, mouth and pharynx 0370–0422",Mean,1.3,1.9,4.7,7.1,2.8,1.3,1.6,3.3,5.1,2,1.3,1.7,4.2,6.3,2.4
-"Procedures on nose, mouth and pharynx 0370–0422",Median,1,1,2,3,1,1,1,2,3,1,1,1,2,3,1
+"Procedures on nose, mouth and pharynx 0370â€“0422",Mean,1.3,1.9,4.7,7.1,2.8,1.3,1.6,3.3,5.1,2,1.3,1.7,4.2,6.3,2.4
+"Procedures on nose, mouth and pharynx 0370â€“0422",Median,1,1,2,3,1,1,1,2,3,1,1,1,2,3,1
 Tonsillectomy or adenoidectomy 0412,Mean,1.1,1.3,2.3,3.3,1.2,1.2,1.2,1.5,1.5,1.2,1.1,1.2,1.9,2.5,1.2
 Tonsillectomy or adenoidectomy 0412,Median,1,1,1,2,1,1,1,1,2,1,1,1,1,2,1
-Dental services 0450–0490,Mean,1.5,3.9,11.9,11.5,4.6,1.7,2,4.9,39.8,3.8,1.6,2.8,8.8,19.2,4.2
-Dental services 0450–0490,Median,1,1,2,3,1,1,1,3,1,1,1,1,2,2,1
-Procedures on respiratory system 0520–0571,Mean,18.2,14.2,17.7,17.2,17.1,21.2,14.1,14.3,18.1,17.3,19.4,14.2,16.3,17.6,17.2
-Procedures on respiratory system 0520–0571,Median,9,6,8,10,9,12,7,8,10,9,10,6,8,10,9
-"Bronchoscopy with/without biopsy 0543–0544, 41892-01[0545]",Mean,20.9,11.4,14,17.1,15.5,24.7,10.5,14.3,15.8,15.2,22.6,11,14.2,16.5,15.4
-"Bronchoscopy with/without biopsy 0543–0544, 41892-01[0545]",Median,4,8,8,11,9,5,7,9,10,9,4,8,9,10,9
-Procedures on cardiovascular system 0600–0777,Mean,16.1,5.9,5.8,8.3,7.5,13.5,7.3,6.1,9,8.2,15,6.5,5.9,8.5,7.7
-Procedures on cardiovascular system 0600–0777,Median,8,2,2,4,3,7,2,2,4,3,7,2,2,4,3
+Dental services 0450â€“0490,Mean,1.5,3.9,11.9,11.5,4.6,1.7,2,4.9,39.8,3.8,1.6,2.8,8.8,19.2,4.2
+Dental services 0450â€“0490,Median,1,1,2,3,1,1,1,3,1,1,1,1,2,2,1
+Procedures on respiratory system 0520â€“0571,Mean,18.2,14.2,17.7,17.2,17.1,21.2,14.1,14.3,18.1,17.3,19.4,14.2,16.3,17.6,17.2
+Procedures on respiratory system 0520â€“0571,Median,9,6,8,10,9,12,7,8,10,9,10,6,8,10,9
+"Bronchoscopy with/without biopsy 0543â€“0544, 41892-01[0545]",Mean,20.9,11.4,14,17.1,15.5,24.7,10.5,14.3,15.8,15.2,22.6,11,14.2,16.5,15.4
+"Bronchoscopy with/without biopsy 0543â€“0544, 41892-01[0545]",Median,4,8,8,11,9,5,7,9,10,9,4,8,9,10,9
+Procedures on cardiovascular system 0600â€“0777,Mean,16.1,5.9,5.8,8.3,7.5,13.5,7.3,6.1,9,8.2,15,6.5,5.9,8.5,7.7
+Procedures on cardiovascular system 0600â€“0777,Median,8,2,2,4,3,7,2,2,4,3,7,2,2,4,3
 Coronary angiography 0668,Mean,14.1,3.6,4.3,5.9,5.3,5.3,4.8,4.1,5.7,5.1,10.1,3.9,4.2,5.8,5.2
 Coronary angiography 0668,Median,1,2,2,3,2,1,2,2,3,3,1,2,2,3,2
-Transluminal coronary angioplasty with/without stenting  0670–0671,Mean,-,3.7,3.1,3.9,3.5,-,2.6,3.5,4.7,4.2,-,3.5,3.2,4.1,3.7
-Transluminal coronary angioplasty with/without stenting  0670–0671,Median,-,2,2,1,2,-,2,2,2,2,-,2,2,2,2
-CABG 0672–0679,Mean,^,13.9,14.3,17.5,16.1,-,^,18.6,22,20.8,^,13.7,14.8,18.3,16.8
-CABG 0672–0679,Median,^,10,10,12,11,-,^,14,12,13,^,9,10,12,12
-Leg varicose vein ligation 0727–0728,Mean,-,1.3,1.3,1.4,1.3,-,1.1,1.1,1.5,1.2,-,1.2,1.2,1.5,1.2
-Leg varicose vein ligation 0727–0728,Median,-,1,1,1,1,-,1,1,1,1,-,1,1,1,1
-Procedures on blood and blood-forming organs 0800–0817,Mean,11.2,15.3,14.3,14.5,14.4,15.6,12,9.7,15.5,12.6,13.6,13.6,12,14.9,13.6
-Procedures on blood and blood-forming organs 0800–0817,Median,5,9,7,8,8,9,4,4,8,5,6,6,6,8,7
-Procedures on digestive system 0850–1011,Mean,4.8,5.2,9,12.6,9.1,5,4.5,8.2,13.8,8.9,4.9,4.8,8.6,13.2,9
-Procedures on digestive system 0850–1011,Median,2,2,4,7,4,3,2,4,8,4,3,2,4,7,4
+Transluminal coronary angioplasty with/without stenting  0670â€“0671,Mean,-,3.7,3.1,3.9,3.5,-,2.6,3.5,4.7,4.2,-,3.5,3.2,4.1,3.7
+Transluminal coronary angioplasty with/without stenting  0670â€“0671,Median,-,2,2,1,2,-,2,2,2,2,-,2,2,2,2
+CABG 0672â€“0679,Mean,^,13.9,14.3,17.5,16.1,-,^,18.6,22,20.8,^,13.7,14.8,18.3,16.8
+CABG 0672â€“0679,Median,^,10,10,12,11,-,^,14,12,13,^,9,10,12,12
+Leg varicose vein ligation 0727â€“0728,Mean,-,1.3,1.3,1.4,1.3,-,1.1,1.1,1.5,1.2,-,1.2,1.2,1.5,1.2
+Leg varicose vein ligation 0727â€“0728,Median,-,1,1,1,1,-,1,1,1,1,-,1,1,1,1
+Procedures on blood and blood-forming organs 0800â€“0817,Mean,11.2,15.3,14.3,14.5,14.4,15.6,12,9.7,15.5,12.6,13.6,13.6,12,14.9,13.6
+Procedures on blood and blood-forming organs 0800â€“0817,Median,5,9,7,8,8,9,4,4,8,5,6,6,6,8,7
+Procedures on digestive system 0850â€“1011,Mean,4.8,5.2,9,12.6,9.1,5,4.5,8.2,13.8,8.9,4.9,4.8,8.6,13.2,9
+Procedures on digestive system 0850â€“1011,Median,2,2,4,7,4,3,2,4,8,4,3,2,4,7,4
 "Fibreoptic colonoscopy with/without excision 0905, 0911",Mean,2.7,6.6,9.4,11.8,10.2,2,6.7,7.9,11.4,9.6,2.4,6.7,8.7,11.6,9.9
 "Fibreoptic colonoscopy with/without excision 0905, 0911",Median,3,5,4,6,5,1,5,5,7,6,2,5,5,6,5
 Appendicectomy 0926,Mean,3,2.8,3.9,6.4,3.1,3.2,2.9,4.2,8,3.2,3.1,2.8,4.1,7.2,3.1
@@ -55,20 +55,20 @@ Division of abdominal adhesions 0986,Mean,46,11.3,14.3,20.3,17.6,5.6,4.2,8.7,15,
 Division of abdominal adhesions 0986,Median,8,7,10,13,10,5,2,6,12,5,6,3,7,12,7
 "Repair of inguinal and obstructed hernia 0990, 0997",Mean,2,1.7,2,2.8,2.4,2.5,2.4,4,9.7,6.7,2,1.8,2.3,3.8,3
 "Repair of inguinal and obstructed hernia 0990, 0997",Median,1,1,1,1,1,1,2,3,4,3,1,1,1,1,1
-Panendoscopy with/without excision 1005–1008,Mean,2.9,5.3,8.6,12.6,10,3.3,5.5,8.6,13.3,10.4,3.1,5.4,8.6,12.9,10.2
-Panendoscopy with/without excision 1005–1008,Median,2,3,4,7,5,2,3,5,7,6,2,3,5,7,5
-Procedures on urinary system 1040–1129,Mean,5.4,5,6.1,9.5,7.6,6.1,4.5,6.2,10.3,7.2,5.6,4.7,6.2,9.7,7.5
-Procedures on urinary system 1040–1129,Median,3,3,3,5,4,3,3,3,5,3,3,3,3,5,4
+Panendoscopy with/without excision 1005â€“1008,Mean,2.9,5.3,8.6,12.6,10,3.3,5.5,8.6,13.3,10.4,3.1,5.4,8.6,12.9,10.2
+Panendoscopy with/without excision 1005â€“1008,Median,2,3,4,7,5,2,3,5,7,6,2,3,5,7,5
+Procedures on urinary system 1040â€“1129,Mean,5.4,5,6.1,9.5,7.6,6.1,4.5,6.2,10.3,7.2,5.6,4.7,6.2,9.7,7.5
+Procedures on urinary system 1040â€“1129,Median,3,3,3,5,4,3,3,3,5,3,3,3,3,5,4
 Examination procedures on bladder (includes cystoscopy) 1089,Mean,1.6,7.1,9.6,11.1,10.4,^,4.8,4.5,13.8,9.3,1.4,5.9,7.5,11.7,10.1
 Examination procedures on bladder (includes cystoscopy) 1089,Median,1,2,3,5,4,^,2,2,6,3,1,2,2,5,4
-Procedures on male genital organs 1160–1203,Mean,**,**,**,**,**,**,**,**,**,1.3,2.6,5.1,5.4,3.9,1.3
-Procedures on male genital organs 1160–1203,Median,**,**,**,**,**,**,**,**,**,1,1,4,4,2,1
-Prostatectomy 1165–1167,Mean,-,5.2,5.4,5.3,5.4,-,-,-,-,-,-,5.2,5.4,5.3,5.4
-Prostatectomy 1165–1167,Median,-,4,4,4,4,-,-,-,-,-,-,4,4,4,4
+Procedures on male genital organs 1160â€“1203,Mean,**,**,**,**,**,**,**,**,**,1.3,2.6,5.1,5.4,3.9,1.3
+Procedures on male genital organs 1160â€“1203,Median,**,**,**,**,**,**,**,**,**,1,1,4,4,2,1
+Prostatectomy 1165â€“1167,Mean,-,5.2,5.4,5.3,5.4,-,-,-,-,-,-,5.2,5.4,5.3,5.4
+Prostatectomy 1165â€“1167,Median,-,4,4,4,4,-,-,-,-,-,-,4,4,4,4
 Circumcision 30653-00[1196],Mean,1.4,1.4,1.4,4.5,2.1,-,-,-,-,-,1.4,1.4,1.4,4.5,2.1
 Circumcision 30653-00[1196],Median,1,1,1,1,1,-,-,-,-,-,1,1,1,1,1
-Gynaecological procedures 1240–1299,Mean,-,-,-,-,-,2.7,2.2,3.8,5.6,3.1,2.7,2.2,3.8,5.6,3.1
-Gynaecological procedures 1240–1299,Median,-,-,-,-,-,2,1,3,4,2,2,1,3,4,2
+Gynaecological procedures 1240â€“1299,Mean,-,-,-,-,-,2.7,2.2,3.8,5.6,3.1,2.7,2.2,3.8,5.6,3.1
+Gynaecological procedures 1240â€“1299,Median,-,-,-,-,-,2,1,3,4,2,2,1,3,4,2
 "Oophorectomy and salpingo-oophorectomy 1243, 1252",Mean,-,-,-,-,-,3.7,3.8,3.1,4.6,3.6,3.7,3.8,3.1,4.6,3.6
 "Oophorectomy and salpingo-oophorectomy 1243, 1252",Median,-,-,-,-,-,4,3,2,3,3,4,3,2,3,3
 Salpingectomy 1251,Mean,-,-,-,-,-,^,2.8,2.9,^,2.8,^,2.8,2.9,^,2.8
@@ -77,12 +77,12 @@ Examination procedures on uterus 1259,Mean,-,-,-,-,-,^,2.8,2,6.1,3.3,^,2.8,2,6.1
 Examination procedures on uterus 1259,Median,-,-,-,-,-,^,1,1,2,1,^,1,1,2,1
 Curettage and evacuation of uterus 1265,Mean,-,-,-,-,-,-,1.4,2.3,7.7,1.5,-,1.4,2.3,7.7,1.5
 Curettage and evacuation of uterus 1265,Median,-,-,-,-,-,-,1,1,1,1,-,1,1,1,1
-Hysterectomy 1268–1269,Mean,-,-,-,-,-,-,4.7,4.9,6.2,5.2,-,4.7,4.9,6.2,5.2
-Hysterectomy 1268–1269,Median,-,-,-,-,-,-,4,4,5,4,-,4,4,5,4
+Hysterectomy 1268â€“1269,Mean,-,-,-,-,-,-,4.7,4.9,6.2,5.2,-,4.7,4.9,6.2,5.2
+Hysterectomy 1268â€“1269,Median,-,-,-,-,-,-,4,4,5,4,-,4,4,5,4
 "Repair of prolapse of uterus, pelvic floor or enterocele 1283",Mean,-,-,-,-,-,-,3.2,3.2,3.9,3.5,-,3.2,3.2,3.9,3.5
 "Repair of prolapse of uterus, pelvic floor or enterocele 1283",Median,-,-,-,-,-,-,3,3,3,3,-,3,3,3,3
-Obstetric procedures 1330–1347,Mean,-,-,-,-,-,^,3.6,5.8,-,3.6,^,3.6,5.8,-,3.6
-Obstetric procedures 1330–1347,Median,-,-,-,-,-,^,3,5,-,3,^,3,5,-,3
+Obstetric procedures 1330â€“1347,Mean,-,-,-,-,-,^,3.6,5.8,-,3.6,^,3.6,5.8,-,3.6
+Obstetric procedures 1330â€“1347,Median,-,-,-,-,-,^,3,5,-,3,^,3,5,-,3
 Analgesia and anaesthesia during labour and delivery procedure 1333,Mean,-,-,-,-,-,-,2.8,^,-,2.8,-,2.8,^,-,2.8
 Analgesia and anaesthesia during labour and delivery procedure 1333,Median,-,-,-,-,-,-,2,^,-,2,-,2,^,-,2
 Medical or surgical induction of labour 1334,Mean,-,-,-,-,-,-,3.2,^,-,3.2,-,3.2,^,-,3.2
@@ -101,38 +101,38 @@ Episiotomy associated with delivery 90472-00[1343],Mean,-,-,-,-,-,-,3.1,^,-,3.1,
 Episiotomy associated with delivery 90472-00[1343],Median,-,-,-,-,-,-,3,^,-,3,-,3,^,-,3
 Postpartum suture 1344,Mean,-,-,-,-,-,^,2.5,2.9,-,2.5,^,2.5,2.9,-,2.5
 Postpartum suture 1344,Median,-,-,-,-,-,^,2,3,-,2,^,2,3,-,2
-Procedures on musculoskeletal system 1360–1580,Mean,2,3.7,6.6,13.2,6.8,2.2,3.6,5.1,12.2,7.9,2.1,3.6,5.8,12.6,7.4
-Procedures on musculoskeletal system 1360–1580,Median,1,1,3,6,2,1,2,3,6,4,1,1,3,6,3
+Procedures on musculoskeletal system 1360â€“1580,Mean,2,3.7,6.6,13.2,6.8,2.2,3.6,5.1,12.2,7.9,2.1,3.6,5.8,12.6,7.4
+Procedures on musculoskeletal system 1360â€“1580,Median,1,1,3,6,2,1,2,3,6,4,1,1,3,6,3
 Arthroplasty of hip 1489,Mean,^,4.4,5.7,11.3,9.2,^,5,5.9,12.8,10.9,8.8,4.7,5.8,12.2,10.1
 Arthroplasty of hip 1489,Median,^,4,4,6,5,^,4,4,7,6,5,4,4,7,6
-Arthroplasty of knee 1518–1519,Mean,-,5.2,4.7,5.9,5.4,-,5.2,4.7,5.5,5.3,-,5.2,4.7,5.7,5.3
-Arthroplasty of knee 1518–1519,Median,-,4,4,5,4,-,4,4,5,5,-,4,4,5,5
-Dermatological and plastic procedures 1600–1718,Mean,2.9,3.4,7.7,11.1,5.6,3.3,3.3,6.2,11,5.4,3.1,3.3,7.2,11.1,5.5
-Dermatological and plastic procedures 1600–1718,Median,1,1,2,3,2,1,1,2,4,2,1,1,2,3,2
+Arthroplasty of knee 1518â€“1519,Mean,-,5.2,4.7,5.9,5.4,-,5.2,4.7,5.5,5.3,-,5.2,4.7,5.7,5.3
+Arthroplasty of knee 1518â€“1519,Median,-,4,4,5,4,-,4,4,5,5,-,4,4,5,5
+Dermatological and plastic procedures 1600â€“1718,Mean,2.9,3.4,7.7,11.1,5.6,3.3,3.3,6.2,11,5.4,3.1,3.3,7.2,11.1,5.5
+Dermatological and plastic procedures 1600â€“1718,Median,1,1,2,3,2,1,1,2,4,2,1,1,2,3,2
 Excision of lesion(s) of skin and subcutaneous tissue 1620,Mean,1.3,2.1,2.7,7.5,5.4,1.1,1.5,3.1,5.6,4.2,1.2,1.8,2.9,6.7,4.8
 Excision of lesion(s) of skin and subcutaneous tissue 1620,Median,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1
 Other debridement of skin and subcutaneous tissue 1628,Mean,1.3,4.7,10.6,18,8.7,1.6,5.5,9.8,15.5,8.7,1.5,4.9,10.4,17.1,8.7
 Other debridement of skin and subcutaneous tissue 1628,Median,1,2,3,7,2,1,1,4,9,3,1,2,3,8,2
-Skin graft 1640–1650,Mean,4.1,8.6,13.6,16.7,11.1,10.6,9.9,9.6,20.6,14.2,7.6,9,11.9,18.8,12.5
-Skin graft 1640–1650,Median,2,5,13,13,8,6,7,8,15,10,2,6,10,14,9
-Procedures on breast 1740–1759,Mean,^,2.5,7.2,5.3,4.1,^,2.5,3.3,5.4,3.6,^,2.5,3.3,5.4,3.6
-Procedures on breast 1740–1759,Median,^,2,2,3,2,^,1,2,2,2,^,1,2,2,2
-Breast biopsy 1743–1744,Mean,-,^,^,^,9.9,-,1.6,1.9,5.7,3.2,-,1.6,2.1,5.7,3.2
-Breast biopsy 1743–1744,Median,-,^,^,^,2,-,1,1,1,1,-,1,1,1,1
-Mastectomy 1747–1748,Mean,-,3,2,4.4,3.3,-,4.1,4.7,5.8,4.9,-,4,4.7,5.7,4.8
-Mastectomy 1747–1748,Median,-,4,1,3,3,-,3,4,4,4,-,3,4,4,4
-Radiation oncology procedures 1786–1799,Mean,^,20.1,19.6,20.3,20,^,10.8,17.8,21.1,17.7,^,12.8,18.5,20.6,18.7
-Radiation oncology procedures 1786–1799,Median,^,10,14,14,14,^,5,13,17,12,^,5,13,15,13
-"Non-invasive, cognitive and other interventions, not elsewhere classified 1820–1922",Mean,4.8,7.4,9.2,12.8,10.5,5.1,5.2,9.1,13.9,10.7,4.9,6.1,9.2,13.4,10.6
-"Non-invasive, cognitive and other interventions, not elsewhere classified 1820–1922",Median,3,4,5,7,6,3,2,5,8,6,3,3,5,8,6
+Skin graft 1640â€“1650,Mean,4.1,8.6,13.6,16.7,11.1,10.6,9.9,9.6,20.6,14.2,7.6,9,11.9,18.8,12.5
+Skin graft 1640â€“1650,Median,2,5,13,13,8,6,7,8,15,10,2,6,10,14,9
+Procedures on breast 1740â€“1759,Mean,^,2.5,7.2,5.3,4.1,^,2.5,3.3,5.4,3.6,^,2.5,3.3,5.4,3.6
+Procedures on breast 1740â€“1759,Median,^,2,2,3,2,^,1,2,2,2,^,1,2,2,2
+Breast biopsy 1743â€“1744,Mean,-,^,^,^,9.9,-,1.6,1.9,5.7,3.2,-,1.6,2.1,5.7,3.2
+Breast biopsy 1743â€“1744,Median,-,^,^,^,2,-,1,1,1,1,-,1,1,1,1
+Mastectomy 1747â€“1748,Mean,-,3,2,4.4,3.3,-,4.1,4.7,5.8,4.9,-,4,4.7,5.7,4.8
+Mastectomy 1747â€“1748,Median,-,4,1,3,3,-,3,4,4,4,-,3,4,4,4
+Radiation oncology procedures 1786â€“1799,Mean,^,20.1,19.6,20.3,20,^,10.8,17.8,21.1,17.7,^,12.8,18.5,20.6,18.7
+Radiation oncology procedures 1786â€“1799,Median,^,10,14,14,14,^,5,13,17,12,^,5,13,15,13
+"Non-invasive, cognitive and other interventions, not elsewhere classified 1820â€“1922",Mean,4.8,7.4,9.2,12.8,10.5,5.1,5.2,9.1,13.9,10.7,4.9,6.1,9.2,13.4,10.6
+"Non-invasive, cognitive and other interventions, not elsewhere classified 1820â€“1922",Median,3,4,5,7,6,3,2,5,8,6,3,3,5,8,6
 Administration of blood and blood products 1893,Mean,3.9,7.8,9.5,11.1,9.9,4.7,4.6,9.6,11.1,9.3,4.3,5.6,9.5,11.1,9.6
 Administration of blood and blood products 1893,Median,2,4,6,6,5,2,2,4,6,5,2,3,5,6,5
 Conduction anaesthesia 1909,Mean,-,^,^,17.8,12,-,4,^,^,4,-,4.1,^,12.6,5
 Conduction anaesthesia 1909,Median,-,^,^,9,2,-,3,^,^,3,-,3,^,2,3
 Cerebral anaesthesia 1910,Mean,^,18.1,20.6,5.7,14.7,6.8,3.6,10,7.9,6.8,7.8,11.8,15.3,6.8,10.7
 Cerebral anaesthesia 1910,Median,^,2,5,6,3,6,3,6,4,4,6,2,5,5,3
-Imaging services 1940–2016,Mean,5.9,10.7,9.5,13.7,10.6,6.1,6.3,9.8,13,9.8,6,8.4,9.6,13.4,10.2
-Imaging services 1940–2016,Median,1,4,5,7,4,2,3,5,7,5,1,3,5,7,4
+Imaging services 1940â€“2016,Mean,5.9,10.7,9.5,13.7,10.6,6.1,6.3,9.8,13,9.8,6,8.4,9.6,13.4,10.2
+Imaging services 1940â€“2016,Median,1,4,5,7,4,2,3,5,7,5,1,3,5,7,4
 Computerised tomography scan 1952-1966,Mean,4.6,11.7,6.7,8.9,8.3,7.2,1.5,2.1,5.9,4.3,6,6.2,4.4,7.3,6.2
 Computerised tomography scan 1952-1966,Median,1,1,1,1,1,3,1,1,1,1,2,1,1,1,1
 Magnetic resonance imaging 2015,Mean,6.7,10,6.9,22.2,7.8,6.9,5.2,15.9,11.1,8,6.8,7.6,12,14.9,7.9
