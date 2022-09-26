@@ -7,12 +7,8 @@ Created on Thu Sep 22 21:17:28 2022
 
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
-import tensorflow as tf
 
-from tensorflow import keras
-from keras.layers import Dense
 #%%
 df=pd.read_csv('data/temp_et_coord_14villes.csv', sep = ';')
 donn=df.to_numpy()
@@ -27,11 +23,14 @@ nomvilles=df.columns
 
 #%%
 
+execfile('Graph_France.py')
 
+#%%
+'''
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
 for i in range(len(nomvilles)):
-    ax.plot(donn[12,i], donn[13,i], "*", label=nomvilles[i], markersize = 10);
+    ax.plot(donn[12,i], donn[13,i], "*", label=nomvilles[i], markersize = 10)
     ax.text(donn[12,i]*1.002, donn[13,i]*1.002, nomvilles[i], fontsize=14.5)
     
 ax.set_xlabel("Longitude", fontsize=18)
@@ -40,8 +39,7 @@ ax.set_title("Ubicación de las ciudades Longitud y Latitud", fontsize=25)
 
 #ax.legend()
 fig.show()
-
-
+'''
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juliet', 'Août','Septembre','Octobre','Novembre','Décembre']
