@@ -1,0 +1,123 @@
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("corrplot")
+
+require("dplyr")
+require("ggplot2")
+require("corrplot")
+
+#La función str de R me indica el tipo de datos en el conjunto de datos de "mtcars". 
+str(mtcars2)
+
+#La función de resumen me permite ver estadísticas de resumen básicas para cada columna.
+summary(mtcars2)
+
+# Los cilindros se encuentran en entero, tienen que ser un valor discreto
+
+mtcars2$cylinders = mtcars2$cylinders %>%
+  factor(labels = sort(unique(mtcars2$cylinders)))
+
+str(mtcars2$model)
+
+#Cambiar la etiqueta de los países "1,2,3" por el respectivo nombre.
+
+origins <- c('USA', 'Europe', 'Japan')
+mtcars2$origin <- factor(mtcars2$origin, labels = origins)
+
+#Gráficos univariados
+#histograma
+#millas por galón
+
+hist(mtcars2$mpg, xlab = "Millas por galón", ylab = "Frecuencia", 
+     main='Histograma: Millas por galón',col = "blue")
+
+
+#¿Que tipo de asimetría presenta?
+
+#Número de cilindros
+
+qplot(mtcars2$cylinders, xlab = "Cilindros", ylab = "Cuenta", 
+      main="Diagrama de barras - número de cilindros")
+
+
+# Número de cilindros presentación en tabla
+table(mtcars2$cylinders)
+
+# Histograma Peso
+
+#¿Qué tipo de asimetría presenta?
+#¿Qué tipo de curtosis presenta?
+
+# Histograma aceleración
+
+#¿Qué tipo de asimetría presenta?
+#¿Qué tipo de curtosis presenta?
+#¿Gráficamente podría comportarse como una distribución normal?
+
+#Gráfico de barras frecuencia número de vehículos por año
+
+qplot(mtcars2$model, xlab = "Modelo", ylab = "Frecuencia", 
+      main="Diagrama de barras - Vehículos por modelo")
+table(mtcars2$model)
+
+#Gráfico de barras frecuencia - número de vehículos por fabricante
+
+# ¿Qué país presenta una mayor frecuencia?
+
+ggplot(mtcars2, aes(x = origin)) +
+  geom_bar() +
+  geom_text(aes(label = ..count..), stat = "count", vjust = 1.25, colour = "white")+
+  xlab("País fabricante")+
+  ylab("Frecuencia")
+
+#Gráficos bivariados
+
+#Gráfico de dispersión (peso vs millas por galón)
+
+ggplot(data = mtcars2, aes(x = mpg, y = weight)) +
+  geom_point() +
+  geom_smooth(method='lm') +
+  xlab('Millas por galón') +
+  ylab("Peso") +
+  ggtitle("MPG vs. Peso")
+
+#Diagrama de cajas y bigotes
+#Millas por galón segmentado por país
+
+ggplot(data = mtcars2, aes(x = origin, y = mpg)) +
+  geom_boxplot() +
+  xlab("Región de origen") +
+  ylab('MPG') +
+  ggtitle("Comparación MPG por región de Origen")+ geom_boxplot(aes(colour=origin, group=origin))
+
+#model_years = sort(unique(mtcars2$model))
+#mtcars2$model = mtcars2$model %>%
+  #factor(labels = model_years)
+
+#Millas por galón por año de fabricación
+
+ggplot(data = mtcars2, aes(x = model, y = mpg)) +
+  geom_boxplot() +
+  xlab('Model Year') +
+  ylab('MPG') +
+  ggtitle('MPG Comparison by Model Year')+geom_boxplot(aes(colour=model, group=model))
+
+## Realice un diagrama de cajas y bigotes para determinar gráficamente si existe alguna diferencia
+## entre los pesos de los vehículos por su origen de fabricación.
+
+## Realice un diagrama de cajas y bigotes para determinar gráficamente si existe alguna diferencia
+## entre el rendimiento de los vehículos por su número de cilindros.
+
+## ¿Existe un relación entre el número de cilindros y el peso de los vehículos? ¿Qué gráfico utilizaría para argumentar su respuesta?
+
+
+## Nombrar las variables que presentan correlación positiva (>=70%) y correlación  negativa (<= - 70%).
+
+str(mtcars2)
+
+mtcars3<-mtcars2[,c(-2,-7,-8,-9)]
+mtcars3
+M <- cor(mtcars3)
+library(corrplot)
+corrplot(M, method = "circle")
+corrplot(M, method = "number")

@@ -1,0 +1,479 @@
+rm(list = ls())
+
+library(readxl)
+library(ggplot2)
+library(dplyr)
+
+########## Importar datos ########
+#ruta="C:/Users/user/OneDrive - Universidad de la Sabana/Sistema de Urgencias/ArchivosR/ExportarDatos.xlsx"
+ruta="C:/Users/DAVID MORA MEZA/OneDrive - Universidad de la Sabana/Sistema de Urgencias/ArchivosR/ExportarDatos.xlsx"
+WIPBase <- read_excel(ruta, sheet = "WIP")
+CycleTimeT2Base <- read_excel(ruta, sheet = "CycleTimeT2")
+CycleTimeT3Base <- read_excel(ruta, sheet = "CycleTimeT3")
+CycleTimeRBase <- read_excel(ruta, sheet = "CycleTimeR")
+ConsTimeT2Base <- read_excel(ruta, sheet = "ConsTimeT2")
+ConsTimeT3Base <- read_excel(ruta, sheet = "ConsTimeT3")
+ConsTimeRBase <- read_excel(ruta, sheet = "ConsTimeR")
+CamasObsBase <- read_excel(ruta, sheet = "CamasObs")
+CamasObsRBase <- read_excel(ruta, sheet = "CamasObsR")
+UtilizationEnfBase<- read_excel(ruta, sheet = "UtilizationEnf")
+UtilizationMed2Base <- read_excel(ruta, sheet = "UtilizationMed2")
+UtilizationMed3Base <- read_excel(ruta, sheet = "UtilizationMed3")
+AbanT2Base <- read_excel(ruta, sheet = "AbanT2")
+AbanT3Base <- read_excel(ruta, sheet = "AbanT3")
+AbanRBase <- read_excel(ruta, sheet = "AbanR")
+
+
+###### Importar datos ######
+
+M="Momento"
+Ti="Tiempo R"
+Tn="Tiempo.R"
+WIP=data.frame(c(WIPBase["Momento1"]),c(WIPBase["Tiempo R1"]))
+CycleTimeT2=data.frame(c(CycleTimeT2Base["Momento1"]),c(CycleTimeT2Base["Tiempo R1"]))
+CycleTimeT3=data.frame(c(CycleTimeT3Base["Momento1"]),c(CycleTimeT3Base["Tiempo R1"]))
+CycleTimeR=data.frame(c(CycleTimeRBase["Momento1"]),c(CycleTimeRBase["Tiempo R1"]))
+ConsTimeT2=data.frame(c(ConsTimeT2Base["Momento1"]),c(60*ConsTimeT2Base["Tiempo R1"]))
+ConsTimeT3=data.frame(c(ConsTimeT3Base["Momento1"]),c(60*ConsTimeT3Base["Tiempo R1"]))
+ConsTimeR=data.frame(c(ConsTimeRBase["Momento1"]),c(60*ConsTimeRBase["Tiempo R1"]))
+CamasObs=data.frame(c(CamasObsBase["Momento1"]),c(CamasObsBase["Tiempo R1"]))
+CamasObsR=data.frame(c(CamasObsRBase["Momento1"]),c(CamasObsRBase["Tiempo R1"]))
+UtilizationEnf=data.frame(c(UtilizationEnfBase["Momento1"]),c(UtilizationEnfBase["Tiempo R1"]))
+UtilizationMed2=data.frame(c(UtilizationMed2Base["Momento1"]),c(UtilizationMed2Base["Tiempo R1"]))
+UtilizationMed3=data.frame(c(UtilizationMed3Base["Momento1"]),c(UtilizationMed3Base["Tiempo R1"]))
+AbanT2=data.frame(c(AbanT2Base["Momento1"]),c(AbanT2Base["Tiempo R1"]))
+AbanT3=data.frame(c(AbanT3Base["Momento1"]),c(AbanT3Base["Tiempo R1"]))
+AbanR=data.frame(c(AbanRBase["Momento1"]),c(AbanRBase["Tiempo R1"]))
+
+WIP=rename(WIP, Hora=Momento1,Pacientes=Tiempo.R1)
+CycleTimeT2=rename(CycleTimeT2, Hora=Momento1,Horas=Tiempo.R1)
+CycleTimeT3=rename(CycleTimeT3, Hora=Momento1,Horas=Tiempo.R1)
+CycleTimeR=rename(CycleTimeR, Hora=Momento1,Horas=Tiempo.R1)
+ConsTimeT2=rename(ConsTimeT2, Hora=Momento1,Minutos=Tiempo.R1)
+ConsTimeT3=rename(ConsTimeT3, Hora=Momento1,Minutos=Tiempo.R1)
+ConsTimeR=rename(ConsTimeR, Hora=Momento1,Minutos=Tiempo.R1)
+CamasObs=rename(CamasObs, Hora=Momento1,Camas=Tiempo.R1)
+CamasObsR=rename(CamasObsR, Hora=Momento1,Camas=Tiempo.R1)
+UtilizationEnf=rename(UtilizationEnf, Hora=Momento1,Utilizacion=Tiempo.R1)
+UtilizationMed2=rename(UtilizationMed2, Hora=Momento1,Utilizacion=Tiempo.R1)
+UtilizationMed3=rename(UtilizationMed3, Hora=Momento1,Utilizacion=Tiempo.R1)
+AbanT2=rename(AbanT2, Hora=Momento1,Horas=Tiempo.R1)
+AbanT3=rename(AbanT3, Hora=Momento1,Horas=Tiempo.R1)
+AbanR=rename(AbanR, Hora=Momento1,Horas=Tiempo.R1)
+
+for(i in 2:20){
+  WIPN=data.frame(c(WIPBase[paste(M,i,sep="")]),c(WIPBase[paste(Ti,i,sep="")]))
+  WIPN=rename(WIPN, Hora=paste(M,i,sep=""),Pacientes=paste(Tn,i,sep=""))
+  WIP=rbind(WIP,WIPN)
+  rm(WIPN)
+  CycleTimeT2N=data.frame(c(CycleTimeT2Base[paste(M,i,sep="")]),c(CycleTimeT2Base[paste(Ti,i,sep="")]))
+  CycleTimeT2N=rename(CycleTimeT2N, Hora=paste(M,i,sep=""),Horas=paste(Tn,i,sep=""))
+  CycleTimeT2=rbind(CycleTimeT2,CycleTimeT2N)
+  rm(CycleTimeT2N)
+  CycleTimeT3N=data.frame(c(CycleTimeT3Base[paste(M,i,sep="")]),c(CycleTimeT3Base[paste(Ti,i,sep="")]))
+  CycleTimeT3N=rename(CycleTimeT3N, Hora=paste(M,i,sep=""),Horas=paste(Tn,i,sep=""))
+  CycleTimeT3=rbind(CycleTimeT3,CycleTimeT3N)
+  rm(CycleTimeT3N)
+  CycleTimeRN=data.frame(c(CycleTimeRBase[paste(M,i,sep="")]),c(CycleTimeRBase[paste(Ti,i,sep="")]))
+  CycleTimeRN=rename(CycleTimeRN, Hora=paste(M,i,sep=""),Horas=paste(Tn,i,sep=""))
+  CycleTimeR=rbind(CycleTimeR,CycleTimeRN)
+  rm(CycleTimeRN)
+  ConsTimeT2N=data.frame(c(ConsTimeT2Base[paste(M,i,sep="")]),c(60*ConsTimeT2Base[paste(Ti,i,sep="")]))
+  ConsTimeT2N=rename(ConsTimeT2N, Hora=paste(M,i,sep=""),Minutos=paste(Tn,i,sep=""))
+  ConsTimeT2=rbind(ConsTimeT2,ConsTimeT2N)
+  rm(ConsTimeT2N)
+  ConsTimeT3N=data.frame(c(ConsTimeT3Base[paste(M,i,sep="")]),c(60*ConsTimeT3Base[paste(Ti,i,sep="")]))
+  ConsTimeT3N=rename(ConsTimeT3N, Hora=paste(M,i,sep=""),Minutos=paste(Tn,i,sep=""))
+  ConsTimeT3=rbind(ConsTimeT3,ConsTimeT3N)
+  rm(ConsTimeT3N)
+  ConsTimeRN=data.frame(c(ConsTimeRBase[paste(M,i,sep="")]),c(60*ConsTimeRBase[paste(Ti,i,sep="")]))
+  ConsTimeRN=rename(ConsTimeRN, Hora=paste(M,i,sep=""),Minutos=paste(Tn,i,sep=""))
+  ConsTimeR=rbind(ConsTimeR,ConsTimeRN)
+  rm(ConsTimeRN)
+  CamasObsN=data.frame(c(CamasObsBase[paste(M,i,sep="")]),c(CamasObsBase[paste(Ti,i,sep="")]))
+  CamasObsN=rename(CamasObsN, Hora=paste(M,i,sep=""),Camas=paste(Tn,i,sep=""))
+  CamasObs=rbind(CamasObs,CamasObsN)
+  rm(CamasObsN)
+  CamasObsRN=data.frame(c(CamasObsRBase[paste(M,i,sep="")]),c(CamasObsRBase[paste(Ti,i,sep="")]))
+  CamasObsRN=rename(CamasObsRN, Hora=paste(M,i,sep=""),Camas=paste(Tn,i,sep=""))
+  CamasObsR=rbind(CamasObsR,CamasObsRN)
+  rm(CamasObsRN)
+  UtilizationEnfN=data.frame(c(UtilizationEnfBase[paste(M,i,sep="")]),c(UtilizationEnfBase[paste(Ti,i,sep="")]))
+  UtilizationEnfN=rename(UtilizationEnfN, Hora=paste(M,i,sep=""),Utilizacion=paste(Tn,i,sep=""))
+  UtilizationEnf=rbind(UtilizationEnf,UtilizationEnfN)
+  rm(UtilizationEnfN)
+  UtilizationMed2N=data.frame(c(UtilizationMed2Base[paste(M,i,sep="")]),c(UtilizationMed2Base[paste(Ti,i,sep="")]))
+  UtilizationMed2N=rename(UtilizationMed2N, Hora=paste(M,i,sep=""),Utilizacion=paste(Tn,i,sep=""))
+  UtilizationMed2=rbind(UtilizationMed2,UtilizationMed2N)
+  rm(UtilizationMed2N)
+  UtilizationMed3N=data.frame(c(UtilizationMed3Base[paste(M,i,sep="")]),c(UtilizationMed3Base[paste(Ti,i,sep="")]))
+  UtilizationMed3N=rename(UtilizationMed3N, Hora=paste(M,i,sep=""),Utilizacion=paste(Tn,i,sep=""))
+  UtilizationMed3=rbind(UtilizationMed3,UtilizationMed3N)
+  rm(UtilizationMed3N)
+  AbanT2N=data.frame(c(AbanT2Base[paste(M,i,sep="")]),c(AbanT2Base[paste(Ti,i,sep="")]))
+  AbanT2N=rename(AbanT2N, Hora=paste(M,i,sep=""),Horas=paste(Tn,i,sep=""))
+  AbanT2=rbind(AbanT2,AbanT2N)
+  rm(AbanT2N)
+  AbanT3N=data.frame(c(AbanT3Base[paste(M,i,sep="")]),c(AbanT3Base[paste(Ti,i,sep="")]))
+  AbanT3N=rename(AbanT3N, Hora=paste(M,i,sep=""),Horas=paste(Tn,i,sep=""))
+  AbanT3=rbind(AbanT3,AbanT3N)
+  rm(AbanT3N)
+  AbanRN=data.frame(c(AbanRBase[paste(M,i,sep="")]),c(AbanRBase[paste(Ti,i,sep="")]))
+  AbanRN=rename(AbanRN, Hora=paste(M,i,sep=""),Horas=paste(Tn,i,sep=""))
+  AbanR=rbind(AbanR,AbanRN)
+  rm(AbanRN)
+  
+}
+
+###### Guardar Replicas ######
+rep=5
+Covids=c("90%","60%","30%","5%")
+Covids2=c("5%","30%","60%","90%")
+
+filas=as.numeric(nrow(WIPBase))
+WIP$Replica=0
+WIP$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    WIP$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  WIP$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+WIP$Covid=factor(WIP$Covid,levels = Covids2)
+WIP=WIP[!is.na(WIP$Pacientes),]
+
+filas=as.numeric(nrow(CycleTimeT2Base))
+CycleTimeT2$Replica=0
+CycleTimeT2$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    CycleTimeT2$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  CycleTimeT2$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+CycleTimeT2$Covid=factor(CycleTimeT2$Covid,levels = Covids2)
+CycleTimeT2=CycleTimeT2[!is.na(CycleTimeT2$Horas),]
+
+filas=as.numeric(nrow(CycleTimeT3Base))
+CycleTimeT3$Replica=0
+CycleTimeT3$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    CycleTimeT3$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  CycleTimeT3$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+CycleTimeT3$Covid=factor(CycleTimeT3$Covid,levels = Covids2)
+CycleTimeT3=CycleTimeT3[!is.na(CycleTimeT3$Horas),]
+
+filas=as.numeric(nrow(CycleTimeRBase))
+CycleTimeR$Replica=0
+CycleTimeR$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    CycleTimeR$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  CycleTimeR$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+CycleTimeR$Covid=factor(CycleTimeR$Covid,levels = Covids2)
+CycleTimeR=CycleTimeR[!is.na(CycleTimeR$Horas),]
+
+filas=as.numeric(nrow(ConsTimeT2Base))
+ConsTimeT2$Replica=0
+ConsTimeT2$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    ConsTimeT2$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  ConsTimeT2$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+ConsTimeT2$Covid=factor(ConsTimeT2$Covid,levels = Covids2)
+ConsTimeT2=ConsTimeT2[!is.na(ConsTimeT2$Minutos),]
+
+filas=as.numeric(nrow(ConsTimeT3Base))
+ConsTimeT3$Replica=0
+ConsTimeT3$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    ConsTimeT3$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  ConsTimeT3$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+ConsTimeT3$Covid=factor(ConsTimeT3$Covid,levels = Covids2)
+ConsTimeT3=ConsTimeT3[!is.na(ConsTimeT3$Minutos),]
+
+filas=as.numeric(nrow(ConsTimeRBase))
+ConsTimeR$Replica=0
+ConsTimeR$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    ConsTimeR$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  ConsTimeR$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+ConsTimeR$Covid=factor(ConsTimeR$Covid,levels = Covids2)
+ConsTimeR=ConsTimeR[!is.na(ConsTimeR$Minutos),]
+
+filas=as.numeric(nrow(CamasObsBase))
+CamasObs$Replica=0
+CamasObs$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    CamasObs$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  CamasObs$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+CamasObs$Covid=factor(CamasObs$Covid,levels = Covids2)
+CamasObs=CamasObs[!is.na(CamasObs$Camas),]
+
+filas=as.numeric(nrow(CamasObsRBase))
+CamasObsR$Replica=0
+CamasObsR$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    CamasObsR$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  CamasObsR$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+CamasObsR$Covid=factor(CamasObsR$Covid,levels = Covids2)
+CamasObsR=CamasObsR[!is.na(CamasObsR$Camas),]
+
+filas=as.numeric(nrow(UtilizationEnfBase))
+UtilizationEnf$Replica=0
+UtilizationEnf$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    UtilizationEnf$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  UtilizationEnf$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+UtilizationEnf$Covid=factor(UtilizationEnf$Covid,levels = Covids2)
+UtilizationEnf=UtilizationEnf[!is.na(UtilizationEnf$Utilizacion),]
+
+filas=as.numeric(nrow(UtilizationMed2Base))
+UtilizationMed2$Replica=0
+UtilizationMed2$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    UtilizationMed2$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  UtilizationMed2$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+UtilizationMed2$Covid=factor(UtilizationMed2$Covid,levels = Covids2)
+UtilizationMed2=UtilizationMed2[!is.na(UtilizationMed2$Utilizacion),]
+
+filas=as.numeric(nrow(UtilizationMed3Base))
+UtilizationMed3$Replica=0
+UtilizationMed3$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    UtilizationMed3$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  UtilizationMed3$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+UtilizationMed3$Covid=factor(UtilizationMed3$Covid,levels = Covids2)
+UtilizationMed3=UtilizationMed3[!is.na(UtilizationMed3$Utilizacion),]
+
+filas=as.numeric(nrow(AbanT2Base))
+AbanT2$Replica=0
+AbanT2$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    AbanT2$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  AbanT2$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+AbanT2$Covid=factor(AbanT2$Covid,levels = Covids2)
+AbanT2=AbanT2[!is.na(AbanT2$Horas),]
+
+filas=as.numeric(nrow(AbanT3Base))
+AbanT3$Replica=0
+AbanT3$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    AbanT3$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  AbanT3$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+AbanT3$Covid=factor(AbanT3$Covid,levels = Covids2)
+AbanT3=AbanT3[!is.na(AbanT3$Horas),]
+
+filas=as.numeric(nrow(AbanRBase))
+AbanR$Replica=0
+AbanR$Covid=""
+for(C in 1:length(Covids)){
+  for(i in as.numeric(1:rep)){
+    AbanR$Replica[(filas*(5*(C-1)+(i-1))+1):(filas*(5*(C-1)+i))]=i
+  }
+  AbanR$Covid[(5*filas*(C-1)+1):(5*filas*C)]=Covids[C]
+}
+AbanR$Covid=factor(AbanR$Covid,levels = Covids2)
+AbanR=AbanR[!is.na(AbanR$Horas),]
+
+
+
+##### Crear Turnos y Dias #####
+
+Turnos=data.frame("Horas"=c(4,8,12,16,20,24),"Turnos"=c("0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"))
+Turnos$Turnos=factor(Turnos$Turnos,levels=c("0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"))
+Dias=data.frame("Horas"=c(24,48,72,96,120,144,168),"Dias"=c("Lunes","Martes","Mi?rcoles","Jueves","Viernes","S?bado","Domingo"))
+Dias$Dias=factor(Dias$Dias,levels=c("Lunes","Martes","Mi?rcoles","Jueves","Viernes","S?bado","Domingo"))
+DiasSim=data.frame("Horas"=c(192,216,240,264,288,312,336,360,384,408,432,456,480,504,528,552,576,600,624,648,672,696,720,744,768,792,816,840,864,888,912,936,960,984,1008),
+                   "DiasS"=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35))
+
+WIP$Turno=Turnos$Turnos[findInterval(WIP$Hora%%24,Turnos$Horas)+1]
+WIP$Dia=Dias$Dias[findInterval(WIP$Hora%%168,Dias$Horas)+1]
+WIP$DiaSim=DiasSim$DiasS[findInterval(WIP$Hora,DiasSim$Horas)+1]
+
+CycleTimeT2$Turno=Turnos$Turnos[findInterval(CycleTimeT2$Hora%%24,Turnos$Horas)+1]
+CycleTimeT2$Dia=Dias$Dias[findInterval(CycleTimeT2$Hora%%168,Dias$Horas)+1]
+CycleTimeT2$DiaSim=DiasSim$DiasS[findInterval(CycleTimeT2$Hora,DiasSim$Horas)+1]
+
+CycleTimeT3$Turno=Turnos$Turnos[findInterval(CycleTimeT3$Hora%%24,Turnos$Horas)+1]
+CycleTimeT3$Dia=Dias$Dias[findInterval(CycleTimeT3$Hora%%168,Dias$Horas)+1]
+CycleTimeT3$DiaSim=DiasSim$DiasS[findInterval(CycleTimeT3$Hora,DiasSim$Horas)+1]
+
+CycleTimeR$Turno=Turnos$Turnos[findInterval(CycleTimeR$Hora%%24,Turnos$Horas)+1]
+CycleTimeR$Dia=Dias$Dias[findInterval(CycleTimeR$Hora%%168,Dias$Horas)+1]
+CycleTimeR$DiaSim=DiasSim$DiasS[findInterval(CycleTimeR$Hora,DiasSim$Horas)+1]
+
+ConsTimeT2$Turno=Turnos$Turnos[findInterval(ConsTimeT2$Hora%%24,Turnos$Horas)+1]
+ConsTimeT2$Dia=Dias$Dias[findInterval(ConsTimeT2$Hora%%168,Dias$Horas)+1]
+ConsTimeT2$DiaSim=DiasSim$DiasS[findInterval(ConsTimeT2$Hora,DiasSim$Horas)+1]
+
+ConsTimeT3$Turno=Turnos$Turnos[findInterval(ConsTimeT3$Hora%%24,Turnos$Horas)+1]
+ConsTimeT3$Dia=Dias$Dias[findInterval(ConsTimeT3$Hora%%168,Dias$Horas)+1]
+ConsTimeT3$DiaSim=DiasSim$DiasS[findInterval(ConsTimeT3$Hora,DiasSim$Horas)+1]
+
+ConsTimeR$Turno=Turnos$Turnos[findInterval(ConsTimeR$Hora%%24,Turnos$Horas)+1]
+ConsTimeR$Dia=Dias$Dias[findInterval(ConsTimeR$Hora%%168,Dias$Horas)+1]
+ConsTimeR$DiaSim=DiasSim$DiasS[findInterval(ConsTimeR$Hora,DiasSim$Horas)+1]
+
+CamasObs$Turno=Turnos$Turnos[findInterval(CamasObs$Hora%%24,Turnos$Horas)+1]
+CamasObs$Dia=Dias$Dias[findInterval(CamasObs$Hora%%168,Dias$Horas)+1]
+CamasObs$DiaSim=DiasSim$DiasS[findInterval(CamasObs$Hora,DiasSim$Horas)+1]
+
+CamasObs$Turno=Turnos$Turnos[findInterval(CamasObs$Hora%%24,Turnos$Horas)+1]
+CamasObs$Dia=Dias$Dias[findInterval(CamasObs$Hora%%168,Dias$Horas)+1]
+CamasObs$DiaSim=DiasSim$DiasS[findInterval(CamasObs$Hora,DiasSim$Horas)+1]
+
+UtilizationEnf$Turno=Turnos$Turnos[findInterval(UtilizationEnf$Hora%%24,Turnos$Horas)+1]
+UtilizationEnf$Dia=Dias$Dias[findInterval(UtilizationEnf$Hora%%168,Dias$Horas)+1]
+UtilizationEnf$DiaSim=DiasSim$DiasS[findInterval(UtilizationEnf$Hora,DiasSim$Horas)+1]
+
+UtilizationMed2$Turno=Turnos$Turnos[findInterval(UtilizationMed2$Hora%%24,Turnos$Horas)+1]
+UtilizationMed2$Dia=Dias$Dias[findInterval(UtilizationMed2$Hora%%168,Dias$Horas)+1]
+UtilizationMed2$DiaSim=DiasSim$DiasS[findInterval(UtilizationMed2$Hora,DiasSim$Horas)+1]
+
+UtilizationMed3$Turno=Turnos$Turnos[findInterval(UtilizationMed3$Hora%%24,Turnos$Horas)+1]
+UtilizationMed3$Dia=Dias$Dias[findInterval(UtilizationMed3$Hora%%168,Dias$Horas)+1]
+UtilizationMed3$DiaSim=DiasSim$DiasS[findInterval(UtilizationMed3$Hora,DiasSim$Horas)+1]
+
+AbanT2$Turno=Turnos$Turnos[findInterval(AbanT2$Hora%%24,Turnos$Horas)+1]
+AbanT2$Dia=Dias$Dias[findInterval(AbanT2$Hora%%168,Dias$Horas)+1]
+AbanT2$DiaSim=DiasSim$DiasS[findInterval(AbanT2$Hora,DiasSim$Horas)+1]
+
+AbanT3$Turno=Turnos$Turnos[findInterval(AbanT3$Hora%%24,Turnos$Horas)+1]
+AbanT3$Dia=Dias$Dias[findInterval(AbanT3$Hora%%168,Dias$Horas)+1]
+AbanT3$DiaSim=DiasSim$DiasS[findInterval(AbanT3$Hora,DiasSim$Horas)+1]
+
+AbanR$Turno=Turnos$Turnos[findInterval(AbanR$Hora%%24,Turnos$Horas)+1]
+AbanR$Dia=Dias$Dias[findInterval(AbanR$Hora%%168,Dias$Horas)+1]
+AbanR$DiaSim=DiasSim$DiasS[findInterval(AbanR$Hora,DiasSim$Horas)+1]
+
+###### Apilar Diferentes tipos de pacientes #####
+
+CycleTime=rbind(CycleTimeR,CycleTimeT2,CycleTimeT3)
+CycleTime$Paciente=""
+CycleTime$Paciente[1:nrow(CycleTimeR)]="Respiratorio"
+CycleTime$Paciente[(nrow(CycleTimeR)+1):(nrow(CycleTimeR)+nrow(CycleTimeT2))]="Triage 2"
+CycleTime$Paciente[(nrow(CycleTimeR)+nrow(CycleTimeT2)+1):(nrow(CycleTimeR)+nrow(CycleTimeT2)+nrow(CycleTimeT3))]="Triage 3"
+
+ConsTime=rbind(ConsTimeR,ConsTimeT2,ConsTimeT3)
+ConsTime$Paciente=""
+ConsTime$Paciente[1:nrow(ConsTimeR)]="Respiratorio"
+ConsTime$Paciente[(nrow(ConsTimeR)+1):(nrow(ConsTimeR)+nrow(ConsTimeT2))]="Triage 2"
+ConsTime$Paciente[(nrow(ConsTimeR)+nrow(ConsTimeT2)+1):(nrow(ConsTimeR)+nrow(ConsTimeT2)+nrow(ConsTimeT3))]="Triage 3"
+
+
+
+###### An?lisis de cantidad de r?plicas #####
+
+SummarySd=by(ConsTimeR$Minutos,list(ConsTimeR$Covid),sd)
+MinMuestra=min(by(ConsTimeR$Minutos,list(ConsTimeR$Covid),length))
+
+
+library(pwr)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[1]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[2]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[3]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[4]),sig.level=.05)
+
+SummarySd=by(ConsTimeT2$Minutos,list(ConsTimeT2$Covid),sd)
+MinMuestra=min(by(ConsTimeR$Minutos,list(ConsTimeR$Covid),length))
+
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[1]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[2]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[3]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[4]),sig.level=.05)
+
+SummarySd=by(ConsTimeT3$Minutos,list(ConsTimeT3$Covid),sd)
+MinMuestra=min(by(ConsTimeR$Minutos,list(ConsTimeR$Covid),length))
+
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[1]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[2]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[3]),sig.level=.05)
+pwr.anova.test(k=4,n=MinMuestra,f=(5/SummarySd[4]),sig.level=.05)
+
+
+Summary=by(ConsTimeT3$Minutos,list(ConsTimeT3$Replica,ConsTimeT3$Covid),mean)
+ConT3P5=Summary[1:5]
+ConT3P30=Summary[6:10]
+ConT3P60=Summary[11:15]
+ConT3P90=Summary[16:20]
+
+
+qqnorm(Summary[])
+qqline(Summary[],col="red")
+shapiro.test(Summary[])
+
+qqnorm(ConT3P5)
+qqline(ConT3P5,col="red")
+shapiro.test(ConT3P5)
+
+qqnorm(ConT3P30)
+qqline(ConT3P30,col="red")
+shapiro.test(ConT3P30)
+
+qqnorm(ConT3P60)
+qqline(ConT3P60,col="red")
+shapiro.test(ConT3P60)
+
+qqnorm(ConT3P90)
+qqline(ConT3P90,col="red")
+shapiro.test(ConT3P90)
+
+
+N=rep
+Desv5=sd(ConT3P5)
+Media5=mean(ConT3P5)
+Desv30=sd(ConT3P30)
+Media30=mean(ConT3P30)
+Desv60=sd(ConT3P60)
+Media60=mean(ConT3P60)
+Desv90=sd(ConT3P90)
+Media90=mean(ConT3P90)
+e=0.05
+p=0.05
+
+t=qt(1-p/2,N-1)
+
+n5=(t*Desv5)**2/(Media5*e)**2
+n30=(t*Desv30)**2/(Media30*e)**2
+n60=(t*Desv60)**2/(Media60*e)**2
+n90=(t*Desv90)**2/(Media90*e)**2
+
+n5
+n30
+n60
+n90

@@ -1,0 +1,460 @@
+library(ggplot2)
+library(dplyr)
+library(readxl)
+
+################################## Cycle Time ############################################
+CycleTime <- read_excel("C:/Users/DAVID MORA MEZA/Desktop/ArchivosInv/CycleTime.xlsx", 
+                        col_types = c("text", "text", "numeric", 
+                                      "numeric", "text", "text", "numeric"))
+View(CycleTime)
+
+
+CycleTime=filter(CycleTime,Hora>=168)
+
+CycleTimeR=filter(CycleTime,Paciente=="Respiratorio")
+CycleTimeT2=filter(CycleTime,Paciente=="Triage 2")
+CycleTimeT3=filter(CycleTime,Paciente=="Triage 3")
+
+## Análisis de Triage ##
+
+ggplot(data = CycleTime, aes(x = Paciente, y = Tiempo, color = Paciente)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo")
+
+ggplot(data = CycleTime, aes(x = Tiempo, color = Paciente)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTime, aes(x = Tiempo, color = Paciente)) + 
+  geom_density()+
+  labs(x = "Tipo de Paciente",y = "Tiempo")
+
+##Interacción Tipo de Paciente y Covid###
+ggplot(data = CycleTime, aes(x = Paciente, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo")
+
+ggplot(data = CycleTime, aes(x = Covid, y = Tiempo, colour = Paciente,
+                                group = Paciente)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo en sistema", x="Proporción pacientes Covid") +
+  theme_bw()
+
+###Análisis de Covid Respiratorio###
+
+ggplot(data = CycleTimeR, aes(x = Covid, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo")
+
+ggplot(data = CycleTimeR, aes(x = Tiempo, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTimeR, aes(x = Tiempo, color = Covid)) + 
+  geom_density()
+
+##Análisis de turno Respiratorio##
+
+ggplot(data = CycleTimeR, aes(x = reorder(Turno,Tiempo), y = Tiempo, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Tiempo")
+
+ggplot(data = CycleTimeR, aes(x = Tiempo, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTimeR, aes(x = Tiempo, color = Turno)) + 
+  geom_density()
+
+
+##Análisis de día Respiratorio##
+ggplot(data = CycleTimeR, aes(x = reorder(Día,Tiempo), y = Tiempo, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = CycleTimeR, aes(x = Tiempo, color = Día)) + 
+  geom_density()
+
+###Análisis de Covid Triage 2###
+
+ggplot(data = CycleTimeT2, aes(x = Covid, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo")
+
+ggplot(data = CycleTimeT2, aes(x = Tiempo, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTimeT2, aes(x = Tiempo, color = Covid)) + 
+  geom_density()
+
+##Análisis de turno Triage 2##
+
+ggplot(data = CycleTimeT2, aes(x = reorder(Turno,Tiempo), y = Tiempo, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Tiempo")
+
+ggplot(data = CycleTimeT2, aes(x = Tiempo, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTimeT2, aes(x = Tiempo, color = Turno)) + 
+  geom_density()
+
+
+##Análisis de día Triage 2##
+ggplot(data = CycleTimeT2, aes(x = reorder(Día,Tiempo), y = Tiempo, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = CycleTimeT2, aes(x = Tiempo, color = Día)) + 
+  geom_density()
+
+
+###Análisis de Covid Triage 3###
+
+ggplot(data = CycleTimeT3, aes(x = Covid, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo")
+
+ggplot(data = CycleTimeT3, aes(x = Tiempo, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTimeT3, aes(x = Tiempo, color = Covid)) + 
+  geom_density()
+
+##Análisis de turno Triage 3##
+
+ggplot(data = CycleTimeT3, aes(x = reorder(Turno,Tiempo), y = Tiempo, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Tiempo")
+
+ggplot(data = CycleTimeT3, aes(x = Tiempo, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = CycleTimeT3, aes(x = Tiempo, color = Turno)) + 
+  geom_density()
+
+
+##Análisis de día Triage 3##
+ggplot(data = CycleTimeT3, aes(x = reorder(Día,Tiempo), y = Tiempo, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = CycleTimeT3, aes(x = Tiempo, color = Día)) + 
+  geom_density()
+
+###################################################### WIP  #######################################################
+
+WIP <- read_excel("WIP.xlsx", 
+                          col_types = c("numeric", "numeric", "text", 
+                                        "text", "text", "text"))
+View(WIP)
+
+WIP=filter(WIP,Hora>=168)
+
+ggplot(data = WIP, aes(x = Hora, y = Pacientes, color=Covid)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+WIP90=filter(WIP,Covid=="0.9")
+
+ggplot(data = WIP90, aes(x = Hora, y = Pacientes, color=Réplica)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+
+NWIP=aggregate(WIP$Pacientes, list(WIP$Hora,WIP$Covid), FUN=mean)
+
+NWIP=tibble(NWIP)
+colnames(NWIP)=c("Hora","Covid","Pacientes")
+View(NWIP)
+Turnos=data.frame("Horas"=c(4,8,12,16,20,24),"Turnos"=c("0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"))
+Días=data.frame("Horas"=c(24,48,72,96,120,144,168),"Días"=c("Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"))
+
+NWIP$Turno=Turnos$Turnos[findInterval(NWIP$Hora%%24,Turnos$Horas)+1]
+NWIP$Día=Días$Días[findInterval(NWIP$Hora%%168,Días$Horas)+1]
+
+
+ggplot(data = NWIP, aes(x = Hora, y = Pacientes, color=Covid)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Hora",y = "Cantidad de Pacientes")
+
+ggplot(data = NWIP, aes(x = Pacientes, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = NWIP, aes(x = Pacientes, color = Covid)) + 
+  geom_density()
+
+ggplot(data = NWIP, aes(x = reorder(Turno,-Pacientes), y = Pacientes, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = filter(NWIP,Covid != 0.05), aes(x = reorder(Turno,-Pacientes), y = Pacientes, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = filter(NWIP,Covid == 0.05), aes(x = reorder(Turno,-Pacientes), y = Pacientes, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = filter(NWIP,Covid == 0.05), aes(x = reorder(Día,-Pacientes), y = Pacientes, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = filter(NWIP,Covid == 0.05), aes(x = reorder(Día,-Pacientes), y = Pacientes, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = NWIP, aes(x = reorder(Día,-Pacientes), y = Pacientes, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+#######################################################Tiempo a Consultorios################################################
+
+ConsTime <- read_excel("ConsTime.xlsx", 
+                  col_types = c("numeric", "numeric", "text", 
+                                "text", "text"))
+View(ConsTime)
+
+ConsTime=filter(ConsTime,Hora>=168)
+
+summary(ConsTime)
+
+Turnos=data.frame("Horas"=c(4,8,12,16,20,24),"Turnos"=c("0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"))
+Días=data.frame("Horas"=c(24,48,72,96,120,144,168),"Días"=c("Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"))
+
+ConsTime$Turno=Turnos$Turnos[findInterval(ConsTime$Hora%%24,Turnos$Horas)+1]
+ConsTime$Día=Días$Días[findInterval(ConsTime$Hora%%168,Días$Horas)+1]
+
+
+ConsTimeR=filter(ConsTime,Paciente=="Respiratorio")
+ConsTimeT2=filter(ConsTime,Paciente=="Triage 2")
+ConsTimeT3=filter(ConsTime,Paciente=="Triage 3")
+
+## Análisis de Triage ##
+
+ggplot(data = ConsTime, aes(x = Paciente, y = Tiempo, color = Paciente)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo")
+
+ggplot(data = ConsTime, aes(x = Tiempo, color = Paciente)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTime, aes(x = Tiempo, color = Paciente)) + 
+  geom_density()+
+  labs(x = "Tipo de Paciente",y = "Tiempo")
+
+##Interacción Tipo de Paciente y Covid###
+ggplot(data = ConsTime, aes(x = Paciente, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo")
+
+ggplot(data = ConsTime, aes(x = Covid, y = Tiempo, colour = Paciente,
+                             group = Paciente)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo en sistema", x="Proporción pacientes Covid") +
+  theme_bw()
+
+###Análisis de Covid Respiratorio###
+
+ggplot(data = ConsTimeR, aes(x = Covid, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo")
+
+ggplot(data = ConsTimeR, aes(x = Tiempo, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTimeR, aes(x = Tiempo, color = Covid)) + 
+  geom_density()
+
+##Análisis de turno Respiratorio##
+
+ggplot(data = ConsTimeR, aes(x = reorder(Turno,Tiempo), y = Tiempo, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Tiempo")
+
+ggplot(data = ConsTimeR, aes(x = Tiempo, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTimeR, aes(x = Tiempo, color = Turno)) + 
+  geom_density()
+
+
+##Análisis de día Respiratorio##
+ggplot(data = ConsTimeR, aes(x = reorder(Día,Tiempo), y = Tiempo, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = ConsTimeR, aes(x = Tiempo, color = Día)) + 
+  geom_density()
+
+###Análisis de Covid Triage 2###
+
+ggplot(data = ConsTimeT2, aes(x = Covid, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo")
+
+ggplot(data = ConsTimeT2, aes(x = Tiempo, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTimeT2, aes(x = Tiempo, color = Covid)) + 
+  geom_density()
+
+##Análisis de turno Triage 2##
+
+ggplot(data = ConsTimeT2, aes(x = reorder(Turno,Tiempo), y = Tiempo, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Tiempo")
+
+ggplot(data = ConsTimeT2, aes(x = Tiempo, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTimeT2, aes(x = Tiempo, color = Turno)) + 
+  geom_density()
+
+
+##Análisis de día Triage 2##
+ggplot(data = ConsTimeT2, aes(x = reorder(Día,Tiempo), y = Tiempo, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = ConsTimeT2, aes(x = Tiempo, color = Día)) + 
+  geom_density()
+
+
+###Análisis de Covid Triage 3###
+
+ggplot(data = ConsTimeT3, aes(x = Covid, y = Tiempo, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo")
+
+ggplot(data = ConsTimeT3, aes(x = Tiempo, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTimeT3, aes(x = Tiempo, color = Covid)) + 
+  geom_density()
+
+##Análisis de turno Triage 3##
+
+ggplot(data = ConsTimeT3, aes(x = reorder(Turno,Tiempo), y = Tiempo, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Tiempo")
+
+ggplot(data = ConsTimeT3, aes(x = Tiempo, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = ConsTimeT3, aes(x = Tiempo, color = Turno)) + 
+  geom_density()
+
+
+##Análisis de día Triage 3##
+ggplot(data = ConsTimeT3, aes(x = reorder(Día,Tiempo), y = Tiempo, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = ConsTimeT3, aes(x = Tiempo, color = Día)) + 
+  geom_density()
+
+ggplot(data = ConsTimeT3, aes(x = Día, y = Tiempo, colour = Turno, group = Turno)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") + ggtitle("Tiempo en primera atención Triage 3 según día, hora y proporción Covid")+
+  labs(y  =  "Tiempo para primera atención", x="Proporción pacientes Covid") +
+  theme_bw() + facet_wrap(~Covid,scales = "free")
+
+
+
+##################################### Camas Observación  #######################################################
+
+CamasObs <- read_excel("CamasObs.xlsx", 
+                  col_types = c("numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "text", "numeric", 
+                                "text"))
+View(CamasObs)
+
+ggplot(data = CamasObs, aes(x = Hora, y = Promedio, color=Paciente)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Hora",y = "Camas Usadas")+ facet_wrap(~Covid)
+
+CamasObs=filter(CamasObs,Hora>=168)
+
+Turnos=data.frame("Horas"=c(4,8,12,16,20,24),"Turnos"=c("0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"))
+Días=data.frame("Horas"=c(24,48,72,96,120,144,168),"Días"=c("Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"))
+
+CamasObs$Turno=Turnos$Turnos[findInterval(CamasObs$Hora%%24,Turnos$Horas)+1]
+CamasObs$Día=Días$Días[findInterval(CamasObs$Hora%%168,Días$Horas)+1]
+
+ggplot(data = CamasObs, aes(x = Hora, y = Promedio, color=Paciente)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Hora",y = "Camas Usadas")+ facet_wrap(~Covid)
+
+ggplot(data = CamasObs, aes(x = Hora, y = `Réplica 1`, color=Paciente)) + ggplot_add(aes(x = Hora, y = `Réplica 2`, color=Paciente)) +
+  ggplot(data = CamasObs, aes(x = Hora, y = `Réplica 3`, color=Paciente)) + ggplot(data = CamasObs, aes(x = Hora, y = `Réplica 4`, color=Paciente)) +
+  ggplot(data = CamasObs, aes(x = Hora, y = `Réplica 5`, color=Paciente)) +
+  geom_line() +
+  theme_bw()+labs(x = "Hora",y = "Camas Usadas")+ facet_wrap(~Covid)
+
+
+ggplot(data = filter(CamasObs,Paciente=="Respiratorio"), aes(x = Hora, y = `Réplica 1`, colour="Réplica 1")) + 
+  geom_line() + geom_line(aes(x = Hora, y = `Réplica 2`, colour="Réplica 2")) + geom_line(aes(x = Hora, y = `Réplica 3`, colour="Réplica 3")) + geom_line(aes(x = Hora, y = `Réplica 4`, colour="Réplica 4")) + geom_line(aes(x = Hora, y = `Réplica 5`, colour="Réplica 5")) +
+  theme_bw()+labs(x = "Hora",y = "Camas Usadas")+ facet_wrap(~Covid, scales = "free")
+
+ggplot(data = filter(CamasObs,Paciente=="Respiratorio"&Covid==0.05), aes(x = Hora, y = `Réplica 1`, colour="Réplica 1")) + 
+  geom_line() + geom_line(aes(x = Hora, y = `Réplica 2`, colour="Réplica 2")) + geom_line(aes(x = Hora, y = `Réplica 3`, colour="Réplica 3")) + geom_line(aes(x = Hora, y = `Réplica 4`, colour="Réplica 4")) + geom_line(aes(x = Hora, y = `Réplica 5`, colour="Réplica 5")) +
+  theme_bw()+labs(x = "Hora",y = "Camas Usadas")
+
+ggplot(data = filter(CamasObs,Paciente=="Respiratorio") , aes(x = `Réplica 1`, y = `Réplica 2`)) + 
+  geom_point() +
+  theme_bw()+labs(x = "Hora",y = "Camas Usadas")+ facet_wrap(~Covid, scales = "free")
+
+WIP90=filter(WIP,Covid=="0.9")
+
+ggplot(data = WIP90, aes(x = Hora, y = Pacientes, color=Réplica)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+
+NWIP=aggregate(WIP$Pacientes, list(WIP$Hora,WIP$Covid), FUN=mean)
+
+NWIP=tibble(NWIP)
+colnames(NWIP)=c("Hora","Covid","Pacientes")
+View(NWIP)
+Turnos=data.frame("Horas"=c(4,8,12,16,20,24),"Turnos"=c("0:00-4:00","4:00-8:00","8:00-12:00","12:00-16:00","16:00-20:00","20:00-24:00"))
+Días=data.frame("Horas"=c(24,48,72,96,120,144,168),"Días"=c("Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"))
+
+NWIP$Turno=Turnos$Turnos[findInterval(NWIP$Hora%%24,Turnos$Horas)+1]
+NWIP$Día=Días$Días[findInterval(NWIP$Hora%%168,Días$Horas)+1]
+
+
+ggplot(data = NWIP, aes(x = Hora, y = Pacientes, color=Covid)) + 
+  geom_line() +
+  theme_bw()+labs(x = "Hora",y = "Cantidad de Pacientes")
+
+ggplot(data = NWIP, aes(x = Pacientes, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)
+
+ggplot(data = NWIP, aes(x = Pacientes, color = Covid)) + 
+  geom_density()
+
+ggplot(data = NWIP, aes(x = reorder(Turno,-Pacientes), y = Pacientes, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = filter(NWIP,Covid != 0.05), aes(x = reorder(Turno,-Pacientes), y = Pacientes, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+ggplot(data = filter(NWIP,Covid == 0.05), aes(x = reorder(Turno,-Pacientes), y = Pacientes, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = filter(NWIP,Covid == 0.05), aes(x = reorder(Día,-Pacientes), y = Pacientes, color = Día)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = filter(NWIP,Covid == 0.05), aes(x = reorder(Día,-Pacientes), y = Pacientes, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")
+
+ggplot(data = NWIP, aes(x = reorder(Día,-Pacientes), y = Pacientes, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Día",y = "Tiempo")

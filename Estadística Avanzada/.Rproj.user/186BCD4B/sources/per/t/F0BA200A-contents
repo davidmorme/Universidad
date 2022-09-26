@@ -1,0 +1,542 @@
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(ggstatsplot)
+
+################################### Warm-up period ###########################
+
+ggplot(data = WIP, aes(x = Hora, y = Pacientes, color =Replica)) + 
+  geom_line() + geom_vline(xintercept = 168, col="red", size=1) +
+  theme_bw()+labs(x = "Hora de la simulaci?n",y = "Pacientes en el servicio")+
+  ggtitle("Gr?fico para determinar el Warm-up period") +
+  facet_wrap(vars(Covid),scales = "fixed")
+
+################################## Cycle Time ############################################
+
+## An?lisis de Triage ##
+
+ggplot(data = CycleTime, aes(x = Paciente, y = Horas, color = Paciente)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo en sistema (horas)")+
+  ggtitle("Tiempo en sistema por tipo de paciente en todos los escenarios")
+
+ggplot(data = CycleTime, aes(x = Horas, color = Paciente)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  ggtitle("Tiempo en sistema por tipo de paciente en todos los escenarios")
+
+ggplot(data = CycleTime, aes(x = Horas, color = Paciente)) + 
+  geom_density()+
+  labs(x = "Tipo de Paciente",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema por tipo de paciente en todos los escenarios")
+
+##Interacci?n Tipo de Paciente y Covid###
+ggplot(data = CycleTime, aes(x = Paciente, y = Horas, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema por tipo de paciente por escenario")
+
+ggplot(data = CycleTime, aes(x = Covid, y = Horas, colour = Paciente,
+                             group = Paciente)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo en sistema (horas)", x="Proporci?n pacientes Covid") +
+  theme_bw()+
+  ggtitle("Tiempo en sistema por tipo de paciente por escenario")
+
+##Interacci?n Hora y D?a##
+ggplot(data = CycleTime, aes(x = Dia, y = Horas, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema por d?a y turno")
+
+ggplot(data = CycleTime, aes(x = Turno, y = Horas, colour = Dia,
+                             group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo en sistema (horas)", x="Turno") +
+  theme_bw()+
+  ggtitle("Tiempo en sistema por d?a y turno")
+
+ggplot(data = CycleTime, aes(x = Turno, y = Horas, colour = Dia,
+                             group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo en sistema (horas)", x="Turno") +
+  theme_bw()+
+  ggtitle("Tiempo en sistema por d?a, turno, tipo de paciente y escenario") +
+  facet_wrap(vars(Paciente,Covid), scales = "fixed")+ 
+  theme(axis.text.x = element_text(angle=30, vjust = 0.7))
+
+
+###An?lisis de Pacientes Respiratorio###
+
+ggplot(data = CycleTimeR, aes(x = Covid, y = Horas, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por escenario")
+
+ggplot(data = CycleTimeR, aes(x = Horas, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por escenario")
+
+ggplot(data = CycleTimeR, aes(x = Horas, color = Covid)) + 
+  geom_density()+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por escenario")
+
+##An?lisis de turno Respiratorio##
+
+ggplot(data = CycleTimeR, aes(x = Turno, y = Horas, color = Turno)) + 
+  geom_boxplot() +
+  theme_gray()+labs(x = "Turno",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por Turno")
+
+
+ggplot(data = CycleTimeR, aes(x = Horas, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por Turno")
+
+ggplot(data = CycleTimeR, aes(x = Horas, color = Turno)) + 
+  geom_density()+ labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por Turno")
+
+
+##An?lisis de d?a Respiratorio##
+ggplot(data = CycleTimeR, aes(x = Dia, y = Horas, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por D?a")
+
+
+ggplot(data = CycleTimeR, aes(x = Horas, color = Dia)) + 
+  geom_density()+ theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Respiratorio por D?a")
+
+
+###An?lisis de Pacientes Triage 2###
+
+ggplot(data = CycleTimeT2, aes(x = Covid, y = Horas, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por escenario")
+
+ggplot(data = CycleTimeT2, aes(x = Horas, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por escenario")
+
+ggplot(data = CycleTimeT2, aes(x = Horas, color = Covid)) + 
+  geom_density()+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por escenario")
+
+##An?lisis de turno Triage 2##
+
+ggplot(data = CycleTimeT2, aes(x = Turno, y = Horas, color = Turno)) + 
+  geom_boxplot() +
+  theme_gray()+labs(x = "Turno",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por Turno")
+
+
+ggplot(data = CycleTimeT2, aes(x = Horas, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por Turno")
+
+ggplot(data = CycleTimeT2, aes(x = Horas, color = Turno)) + 
+  geom_density()+ labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por Turno")
+
+
+##An?lisis de d?a Triage 2##
+ggplot(data = CycleTimeT2, aes(x = Dia, y = Horas, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por D?a")
+
+
+ggplot(data = CycleTimeT2, aes(x = Horas, color = Dia)) + 
+  geom_density()+ theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 2 por D?a")
+
+###An?lisis de Pacientes Triage 3###
+
+ggplot(data = CycleTimeT3, aes(x = Covid, y = Horas, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por escenario")
+
+ggplot(data = CycleTimeT3, aes(x = Horas, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por escenario")
+
+ggplot(data = CycleTimeT3, aes(x = Horas, color = Covid)) + 
+  geom_density()+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por escenario")
+
+##An?lisis de turno Triage 3##
+
+ggplot(data = CycleTimeT3, aes(x = Turno, y = Horas, color = Turno)) + 
+  geom_boxplot() +
+  theme_gray()+labs(x = "Turno",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por Turno")
+
+
+ggplot(data = CycleTimeT3, aes(x = Horas, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por Turno")
+
+ggplot(data = CycleTimeT3, aes(x = Horas, color = Turno)) + 
+  geom_density()+ labs(x = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por Turno")
+
+
+##An?lisis de d?a Triage 3##
+ggplot(data = CycleTimeT3, aes(x = Dia, y = Horas, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por D?a")
+
+
+ggplot(data = CycleTimeT3, aes(x = Horas, color = Dia)) + 
+  geom_density()+ theme_bw()+labs(x = "D?a",y = "Tiempo (horas)")+
+  ggtitle("Tiempo en sistema paciente Triage 3 por D?a")
+
+################################## Consultorio Time ############################################
+
+## An?lisis de Triage ##
+
+ggplot(data = ConsTime, aes(x = Paciente, y = Minutos, color = Paciente)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo para ser atendido (Minutos)")+
+  ggtitle("Tiempo para ser atendido por tipo de paciente en todos los escenarios")
+
+ggplot(data = ConsTime, aes(x = Minutos, color = Paciente)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  ggtitle("Tiempo para ser atendido por tipo de paciente en todos los escenarios")
+
+ggplot(data = ConsTime, aes(x = Minutos, color = Paciente)) + 
+  geom_density()+
+  labs(x = "Tipo de Paciente",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido por tipo de paciente en todos los escenarios")
+
+##Interacci?n Tipo de Paciente y Covid###
+ggplot(data = ConsTime, aes(x = Paciente, y = Minutos, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Tipo de Paciente",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido por tipo de paciente por escenario")
+
+ggplot(data = ConsTime, aes(x = Covid, y = Minutos, colour = Paciente,
+                             group = Paciente)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo para ser atendido (Minutos)", x="Proporci?n pacientes Covid") +
+  theme_bw()+
+  ggtitle("Tiempo para ser atendido por tipo de paciente por escenario")
+
+##Interacci?n Hora y D?a##
+ggplot(data = ConsTime, aes(x = Dia, y = Minutos, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido por d?a y turno")
+
+ggplot(data = ConsTime, aes(x = Turno, y = Minutos, color = Dia,
+                             group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo para ser atendido (Minutos)", x="Turno") +
+  theme_bw()+
+  ggtitle("Tiempo para ser atendido por d?a y turno")
+
+ggplot(data = ConsTime, aes(x = Turno, y = Minutos, color = Dia, group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Tiempo para ser atendido (Minutos)", x="Turno") +
+  theme_bw()+
+  ggtitle("Tiempo para ser atendido por d?a, turno, tipo de paciente y escenario") +
+  facet_wrap(vars(Paciente,Covid), scales = "fixed")+ 
+  theme(axis.text.x = element_text(angle=30, vjust = 0.7))
+
+
+###An?lisis de Pacientes Respiratorio###
+
+ggplot(data = ConsTimeR, aes(x = Covid, y = Minutos, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por escenario")
+
+ggplot(data = ConsTimeR, aes(x = Minutos, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por escenario")
+
+ggplot(data = ConsTimeR, aes(x = Minutos, color = Covid)) + 
+  geom_density()+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por escenario")
+
+##An?lisis de turno Respiratorio##
+
+ggplot(data = ConsTimeR, aes(x = Turno, y = Minutos, color = Turno)) + 
+  geom_boxplot() +
+  theme_gray()+labs(x = "Turno",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por Turno")
+
+
+ggplot(data = ConsTimeR, aes(x = Minutos, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por Turno")
+
+ggplot(data = ConsTimeR, aes(x = Minutos, color = Turno)) + 
+  geom_density()+ labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por Turno")
+
+
+##An?lisis de d?a Respiratorio##
+ggplot(data = ConsTimeR, aes(x = Dia, y = Minutos, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por D?a")
+
+
+ggplot(data = ConsTimeR, aes(x = Minutos, color = Dia)) + 
+  geom_density()+ theme_bw()+labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Respiratorio por D?a")
+
+
+###An?lisis de Pacientes Triage 2###
+
+ggplot(data = ConsTimeT2, aes(x = Covid, y = Minutos, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por escenario")
+
+ggplot(data = ConsTimeT2, aes(x = Minutos, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por escenario")
+
+ggplot(data = ConsTimeT2, aes(x = Minutos, color = Covid)) + 
+  geom_density()+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por escenario")
+
+##An?lisis de turno Triage 2##
+
+ggplot(data = ConsTimeT2, aes(x = Turno, y = Minutos, color = Turno)) + 
+  geom_boxplot() +
+  theme_gray()+labs(x = "Turno",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por Turno")
+
+
+ggplot(data = ConsTimeT2, aes(x = Minutos, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por Turno")
+
+ggplot(data = ConsTimeT2, aes(x = Minutos, color = Turno)) + 
+  geom_density()+ labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por Turno")
+
+
+##An?lisis de d?a Triage 2##
+ggplot(data = ConsTimeT2, aes(x = Dia, y = Minutos, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por D?a")
+
+
+ggplot(data = ConsTimeT2, aes(x = Minutos, color = Dia)) + 
+  geom_density()+ theme_bw()+labs(x = "D?a",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 2 por D?a")
+
+###An?lisis de Pacientes Triage 3###
+
+ggplot(data = ConsTimeT3, aes(x = Covid, y = Minutos, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Porcentaje de Covid",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por escenario")
+
+ggplot(data = ConsTimeT3, aes(x = Minutos, color = Covid)) +
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por escenario")
+
+ggplot(data = ConsTimeT3, aes(x = Minutos, color = Covid)) + 
+  geom_density()+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por escenario")
+
+##An?lisis de turno Triage 3##
+
+ggplot(data = ConsTimeT3, aes(x = Turno, y = Minutos, color = Turno)) + 
+  geom_boxplot() +
+  theme_gray()+labs(x = "Turno",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por Turno")
+
+
+ggplot(data = ConsTimeT3, aes(x = Minutos, color = Turno)) + 
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por Turno")
+
+ggplot(data = ConsTimeT3, aes(x = Minutos, color = Turno)) + 
+  geom_density()+ labs(x = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por Turno")
+
+
+##An?lisis de d?a Triage 3##
+ggplot(data = ConsTimeT3, aes(x = Dia, y = Minutos, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por D?a")
+
+
+ggplot(data = ConsTimeT3, aes(x = Minutos, color = Dia)) + 
+  geom_density()+ theme_bw()+labs(x = "D?a",y = "Tiempo (Minutos)")+
+  ggtitle("Tiempo para ser atendido paciente Triage 3 por D?a")
+
+################################## Utilization M?dicos Triage 2 ############################################
+
+
+ggplot(data = UtilizationMed2, aes(x = Covid, y = Utilizacion, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Proporci?n Covid",y = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona principal por escenario")
+
+ggplot(data = UtilizationMed2, aes(x = Utilizacion, color = Covid)) + 
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  theme_bw()+labs(x = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona principal por escenario")
+
+ggplot(data = UtilizationMed2, aes(x = Utilizacion, color = Covid)) + 
+  geom_density()+
+  theme_gray()+labs(x = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona principal por escenario")
+
+##Interacci?n Hora y D?a##
+ggplot(data = UtilizationMed2, aes(x = Dia, y = Utilizacion, color = Turno)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "D?a",y = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona principal por d?a y turno")
+
+ggplot(data = UtilizationMed2, aes(x = Turno, y = Utilizacion, colour = Dia,
+                                   group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Utilizaci?n del recurso", x="Turno") +
+  theme_bw()+
+  ggtitle("Utilizaci?n de m?dicos de zona principal por d?a y turno")
+
+ggplot(data = UtilizationMed2, aes(x = Turno, y = Utilizacion, colour = Dia,
+                                   group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Utilizaci?n del recurso", x="Turno") +
+  theme_bw()+
+  ggtitle("Utilizaci?n de m?dicos de zona principal por d?a y turno")+
+  facet_wrap(vars(Covid), scales = "fixed")
+
+################################## Utilization M?dicos Triage 3 ############################################
+
+
+ggplot(data = UtilizationMed3, aes(x = Covid, y = Utilizacion, color = Covid)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Proporci?n Covid",y = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona de expansi?n por escenario")
+
+ggplot(data = UtilizationMed3, aes(x = Utilizacion, color = Covid)) + 
+  geom_density()+
+  geom_histogram(fill="white",aes(y=..density..), position="identity", alpha=0.2)+
+  theme_bw()+labs(x = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona de expansi?n por escenario")
+
+ggplot(data = UtilizationMed3, aes(x = Utilizacion, color = Covid)) + 
+  geom_density()+
+  theme_gray()+labs(x = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona de expansi?n por escenario")
+
+##Interacci?n Hora y D?a##
+ggplot(data = UtilizationMed3, aes(x = Turno, y = Utilizacion, color = Dia)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Turno",y = "Utilizaci?n del recurso")+
+  ggtitle("Utilizaci?n de m?dicos de zona de expansi?n por d?a y turno")
+
+ggplot(data = UtilizationMed3, aes(x = Turno, y = Utilizacion, colour = Dia,
+                                   group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Utilizaci?n del recurso", x="Turno") +
+  theme_bw()+
+  ggtitle("Utilizaci?n de m?dicos de zona de expansi?n por d?a y turno")
+
+ggplot(data = UtilizationMed3, aes(x = Turno, y = Utilizacion, colour = Dia,
+                                   group = Dia)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  labs(y  =  "Utilizaci?n del recurso", x="Turno") +
+  theme_bw()+
+  ggtitle("Utilizaci?n de m?dicos de zona de expansi?n por d?a y turno")+
+  facet_wrap(vars(Covid), scales = "fixed")
+
+
+####### Pruebas estadisticas #####
+
+
+PR=filter(ConsTime,Paciente=="Respiratorio" &Covid=="5%")
+wilcox.test(PR$Minutos, alternative = "two.sided")
+hist(PR$Minutos)
+median(PR$Minutos)
+?wilcox.test()
+kruskal.test(data=ConsTime,Minutos~Paciente)
+
+pdf("Image1.pdf",         # Nombre del archivo
+    width = 14, height = 7) # Ancho y alto en pulgadas
+ggbetweenstats(
+  data  = ConsTimeR,
+  x     = Covid,
+  type = "nonparametric",
+  y     = Minutos, xlab="% of respitarory patients in the ED", ylab="Minutes",
+  title = "Time of first assessment to Respiratory Patient for each scenario")+
+  theme(plot.title = element_text(color="black", size=20, hjust = 0))+
+  theme_gray()
+dev.off()
+
+pdf("Image2.pdf",         # Nombre del archivo
+    width = 14, height = 7) # Ancho y alto en pulgadas
+ggbetweenstats(
+  data  = ConsTimeT2,
+  x     = Covid,
+  type = "nonparametric",
+  y     = Minutos, xlab="% of respitarory patients in the ED", ylab="Minutes",
+  title = "Time of first assessment to Patient Triage 2 for each scenario")+
+  theme(plot.title = element_text(color="black", size=20, hjust = 0.5))+
+  theme_gray()
+dev.off()
+
+pdf("Image3.pdf",         # Nombre del archivo
+    width = 14, height = 7) # Ancho y alto en pulgadas
+ggbetweenstats(
+  data  = ConsTimeT3,
+  x     = Covid,
+  type = "nonparametric",
+  y     = Minutos, xlab="% of respitarory patients in the ED", ylab="Minutes",
+  title = "Time of first assessment to Patient Triage 3 for each scenario")+
+  theme(plot.title = element_text(color="black", size=20, hjust = 0.5))+
+  theme_gray()
+dev.off()

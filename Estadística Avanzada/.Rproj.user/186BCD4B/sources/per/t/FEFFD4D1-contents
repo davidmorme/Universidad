@@ -1,0 +1,82 @@
+library(FrF2)
+library(ggplot2)
+library(nortest)
+library(lmtest)
+library(tseries)
+
+Parcial_Final <- read_excel("C:/Users/DAVID MORA MEZA/Desktop/Parcial_Final.xlsx",
+                            col_types = c("numeric","text","text","text","numeric"))
+
+Y=Parcial_Final$Y
+
+dis_fac<-FrF2(nruns = 8,nfactors = 3,
+              factor.names = list(A=c(-1,1),B=c(-1,1),C=c(-1,1))
+              ,replications = 2,randomize = FALSE)
+
+dis_fac<-add.response(design = dis_fac,response = Y)
+dis_fac
+
+modelo1<-lm(Y~(A+B+C)^3,data = dis_fac)
+summary(modelo1)
+
+step(modelo1)
+
+modelo2=lm(formula = Y ~ A + B + C + A:B + A:C, data = dis_fac)
+summary(modelo2)
+
+modelo3<-lm(Y~(A+C)^2,data = dis_fac)
+summary(modelo3)
+
+AIC(modelo2,modelo3)
+
+## Validacion de supuestos
+
+## Normalidad
+qqnorm(residuals(modelo2))
+qqline(residuals(modelo2),col="red")
+shapiro.test(residuals(modelo2))
+ad.test(residuals(modelo2))
+jarque.bera.test(residuals(modelo2))
+
+# Si p es mayor que alpha, se acepta H0 = es normal
+
+## Independencia
+
+ggplot(data = modelo2, aes(x = c(1:length(Y)), y = modelo2$residuals)) +
+  geom_point() +
+  labs(x = "Observación",y = "Residuo")+
+  theme_bw()
+
+# Test de Durbin Watson
+dwtest(modelo2)
+
+# si p es mayor que alpha, se acpeta H0 = hay independencia
+
+## Varianza constante
+
+#Test Breush Pagan
+bptest(modelo2)
+
+
+
+#Boxplot
+
+ggplot(data = Parcial_Final, aes(x = A, y = Y, color = B)) + 
+  geom_boxplot() +
+  theme_bw()+labs(x = "Viscosidad",y = "Proporción de piezas defectuosas")+ facet_wrap(~C, scales = "fixed")
+
+
+ggplot(data = dis_fac, aes(x = A, y = Y, colour = C,
+                           group = C)) +
+  stat_summary(fun=mean, geom = "point") +
+  stat_summary(fun=mean, geom = "line") +
+  labs(y = "Proporción de piezas defectuosas", x="Viscosidad") +
+  theme_bw()+ facet_wrap(~B, scales = "fixed")+
+  ggtitle("Gráfico de interacción del factor de Viscosidad y Temperatura del proceso (c), de acuerdo con la velociad del rotor")
+
+
+round(predict(modelo2,level = 0.95,interval = "confidence"),3)
+dis_fac
+
+
+
