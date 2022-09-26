@@ -46,7 +46,7 @@ fig.show()
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juliet', 'Août','Septembre','Octobre','Novembre','Décembre']
 
-ax.plot(donn[0:12,:], label=nomvilles, markersize = 10);
+ax.plot(donn[0:12,:], label=nomvilles, markersize = 10, linestyle=":", marker=".");
 
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
@@ -73,7 +73,7 @@ donnN=(donn[0:12]-moyenneT)/stdT
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
-ax.plot(donnN, label=nomvilles, markersize = 10);
+ax.plot(donnN, label=nomvilles, markersize = 10, linestyle=":", marker=".");
 
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
