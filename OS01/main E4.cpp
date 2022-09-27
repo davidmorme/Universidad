@@ -4,35 +4,10 @@
 #include <math.h>
 #include "utilities.h"
 #include "utilities.cpp"
+#include "Medidas.h"
 using namespace std;
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
-double Moyenne(vector <double> T){
-	double somme=0;
-	for(int i = 0; i < T.size(); i++) somme += T[i];
-	return somme/T.size();
-}
-
-double Variance(vector <double> T){
-	double moyenne=Moyenne(T);
-	double sommeC = 0;
-	for(int i = 0; i < T.size(); i++) sommeC += pow(moyenne - T[i],2);
-	return sommeC/T.size();
-}
-
-double Ecart_type(vector <double> T){
-	return sqrt(Variance(T));
-}
-
-int Element_entier(vector <double> T){
-	int nEnt=0;
-	for(int i = 0; i < T.size(); i++){
-		if(T[i] == trunc(T[i])) nEnt++;
-	}
-	return nEnt;
-}
-
 
 int main(int argc, char** argv) {
 	int n; RandGen G; 
