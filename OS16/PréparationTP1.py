@@ -62,44 +62,91 @@ minT=np.min(donn[0:12,])
 donnN=(donn[0:12]-minT)/(maxT-minT)
 
 #%%
+#Puedo hacer todo esto 
 
-moyenneT=np.mean(donn[0:12,])
-stdT=np.std(donn[0:12,])
-
-donnN=(donn[0:12]-moyenneT)/stdT
+donn=donn[0:12]
+d,N=np.shape(donn)
+m=np.mean(donn,axis=1)
+donnC=(donn.T-m).T       #Donnes centres
 
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
-ax.plot(donnN, label=nomvilles, markersize = 10, linestyle=":", marker=".");
+ax.plot(donnC, label=nomvilles, markersize = 10, linestyle=":", marker=".");
 
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
-ax.set_ylabel("Température avec normalisation", fontsize=18)
-ax.set_title("Température avec normalisation vs Mois de chaque ville", fontsize=25)
+ax.set_ylabel("Température avec Centrer", fontsize=18)
+ax.set_title("Température avec Centrer vs Mois de chaque ville", fontsize=25)
+
+ax.legend()
+fig.show()
+
+#%%
+donnC=donnC.T
+sdDonnC = np.sqrt(np.sum(np.square(donnC),1)/N) #Ecart type de le Donne centre
+donnC = donnC[sdDonnC != 0] # enlever les dimesnions où il y a une variance nulle
+
+sdDonnC = np.sqrt((np.sum(np.square(donnC),1))/N)
+donnCR = (donnC.T / sdDonnC).T      #Donnes centres et reduits
+
+cov=np.matmul(donnCR,np.transpose(donnCR))/N #Matriz de covarianza
+
+#cov = np.cov(donnCR, bias=True)
+
+#%%
+fig, ax = plt.subplots(1,1, figsize = (21, 8))
+
+ax.plot(donnCR, label=nomvilles, markersize = 10, linestyle=":", marker=".");
+
+ax.set_xticks(range(0,12),mois,rotation=45)
+ax.set_xlabel("Mois", fontsize=18)
+ax.set_ylabel("Température avec Centrer et Reduit", fontsize=18)
+ax.set_title("Température avec Centrer et Reduit vs Mois de chaque ville", fontsize=25)
+
+ax.legend()
+fig.show()
+
+#%%
+
+#Landa es el valor propio y "x" es el vector propio
+Landa, x = np.linalg.eig(cov)
+
+order=np.argsort(-Landa, axis=0)
+x=x[order]
+Landa=Landa[order]
+
+mI=Landa/np.sum(Landa)
+#%%
+fig, ax = plt.subplots(1,1, figsize = (21, 8))
+
+ax.bar(range(1,13),mI)
+
+ax.set_xticks(range(1,13))
+ax.set_yticks(np.arange(0,1,step=0.1),range(0,100,10))
+ax.set_xlabel("Valores propios", fontsize=18)
+ax.set_ylabel("Percentaje of importance (%)", fontsize=18)
+ax.set_title("Percentaje of importance of each valeur propes", fontsize=25)
 
 ax.legend()
 fig.show()
 #%%
-#Puedo hacer todo esto 
-X=np.matrix(donn[0:12])
-d,N=np.shape(X)
-m=np.mean(X,axis=1)
-SG=np.matmul(X-m,np.transpose(X-m))/N
+X_proj=np.dot(x.T,donn)
+
+fig, ax = plt.subplots(1,1, figsize = (21, 8))
+mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juliet', 'Août','Septembre','Octobre','Novembre','Décembre']
+
+ax.plot(X_proj, label=nomvilles, markersize = 10, linestyle=":", marker=".");
+
+ax.set_xticks(range(0,12),mois,rotation=45)
+ax.set_xlabel("Mois", fontsize=18)
+ax.set_ylabel("Projection de Température", fontsize=18)
+ax.set_title("Projection de Température vs Mois de chaque ville", fontsize=25)
+
+ax.legend()
+fig.show()
 
 #%%
-#O simplemente usar la función que me calcula la matriz de covarianza
-#X=np.matrix(donn[0:12])
-X=np.matrix(donnN)
-cov = np.cov(X, bias=True)
-
-#%%
-A=np.array([[1,1],[0,2]])
-
-#Landa es el valor propio y "x" es el vector propio
-Landa, x = np.linalg.eig(A)
-
-print(A@x-Landa*x)
 
 
-
+plt.matshow(np.corrcoef (X_proj))
