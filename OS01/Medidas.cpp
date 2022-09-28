@@ -24,10 +24,9 @@ double Ecart_type(vector <double> T){
 }
 
 int Element_entier(vector <double> T){
-	int nEnt=0;
 	double e=0.0001; //Error por el que considero entero el valor.
 	for(int i = 0; i < T.size(); i++){
-		if(abs(T[i] - trunc(T[i]))<e) nEnt++;
+		if( (abs(T[i] - trunc(T[i])) < e) || (abs(T[i] - trunc(T[i])) > 1-e) )nEnt++;
 	}
 	return nEnt;
 }
