@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <math.h>
 #include "utilities.h"
-#include "utilities.cpp"
 #include "Medidas.h"
 using namespace std;
 
