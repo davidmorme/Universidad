@@ -44,7 +44,7 @@ X2 = np.sqrt((np.sum(np.square(X),1))/N)
 X3 = (X.T / X2).T
 plt.figure()
 plt.plot(X3)
-
+cov=np.cov(X3, bias=True)
 #%%
 '''=========================================================='''
 ''' code pour tracer les cercle des corrélations après avoir calculé 
@@ -56,7 +56,7 @@ r = np.sqrt(1.0)
 x1 = r*np.cos(theta)
 x2 = r*np.sin(theta)
 
-fig, ax = plt.subplots(1)
+fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
 ax.plot(x1, x2)
 ax.set_aspect(1)
@@ -66,17 +66,23 @@ plt.ylim(-1.05,1.05)
 
 plt.grid(linestyle='--')
 
+r1=VecProp1[:,0]
+r2=VecProp1[:,1]
+
 plt.plot(r1,r2,'*k')
 moisname =['Janv', 'Fév','Mars','Avril','Mai','Juin','Juillet','Aout', 'Sept', 'Oct', 'Nov', 'Dec'];
+
 for i in range(len(moisname)):
-    plt.text(r1[i]+0.15,r2[i],moisname[i],va="center",ha="center",fontsize=8)
+    plt.text(r1[i]*1.08,r2[i]*1.08,moisname[i],va="center",ha="center",fontsize=14.5)
+    plt.plot(np.array([0,r1[i]]),np.array([0,r2[i]]), color="red", linewidth=0.5)
     
 
 plt.title('cercle des corrélations', fontsize=8)
-plt.show()
 plt.savefig("plot_circle_matplotlib_01.png", bbox_inches='tight')
+plt.show()
 
 
+#%%
 '''=========================================================================
 PARTIE 2 : données MNIST
 '''

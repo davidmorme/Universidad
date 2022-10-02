@@ -42,7 +42,7 @@ fig.show()
 '''
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
-mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juliet', 'Août','Septembre','Octobre','Novembre','Décembre']
+mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août','Septembre','Octobre','Novembre','Décembre']
 
 ax.plot(donn[0:12,:], label=nomvilles, markersize = 10, linestyle=":", marker=".");
 
@@ -53,13 +53,6 @@ ax.set_title("Température vs Mois de chaque ville", fontsize=25)
 
 ax.legend()
 fig.show()
-
-#%%
-
-maxT=np.max(donn[0:12,])
-minT=np.min(donn[0:12,])
-
-donnN=(donn[0:12]-minT)/(maxT-minT)
 
 #%%
 #Puedo hacer todo esto 
@@ -83,11 +76,11 @@ ax.legend()
 fig.show()
 
 #%%
-donnC=donnC.T
-sdDonnC = np.sqrt(np.sum(np.square(donnC),1)/N) #Ecart type de le Donne centre
+
+sdDonnC = np.std(donn,axis=1) #Ecart type de le Donne centre
 donnC = donnC[sdDonnC != 0] # enlever les dimesnions où il y a une variance nulle
 
-sdDonnC = np.sqrt((np.sum(np.square(donnC),1))/N)
+sdDonnC = np.std(donn,axis=1)
 donnCR = (donnC.T / sdDonnC).T      #Donnes centres et reduits
 
 cov=np.matmul(donnCR,np.transpose(donnCR))/N #Matriz de covarianza
@@ -109,44 +102,118 @@ fig.show()
 
 #%%
 
-#Landa es el valor propio y "x" es el vector propio
-Landa, x = np.linalg.eig(cov)
+#ValProp es el valor propio y VecProp es el vector propio
+ValProp, VecProp = np.linalg.eig(cov)
 
-order=np.argsort(-Landa, axis=0)
-x=x[order]
-Landa=Landa[order]
+order=np.argsort(-ValProp, axis=0)
 
-mI=Landa/np.sum(Landa)
+ValProp=ValProp[order]
+VecProp=VecProp[:,order]
+
+mI=ValProp/np.sum(ValProp)
+SumAcumI=np.cumsum(mI)
+
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
 ax.bar(range(1,13),mI)
+ax.plot(range(1,13),SumAcumI, color="red")
 
 ax.set_xticks(range(1,13))
-ax.set_yticks(np.arange(0,1,step=0.1),range(0,100,10))
+ax.set_yticks(np.arange(0,1.1,step=0.1),range(0,101,10))
 ax.set_xlabel("Valores propios", fontsize=18)
 ax.set_ylabel("Percentaje of importance (%)", fontsize=18)
-ax.set_title("Percentaje of importance of each valeur propes", fontsize=25)
+ax.set_title("Percentaje of importance of each valeur propes (component)", fontsize=25)
 
 ax.legend()
 fig.show()
+
 #%%
-X_proj=np.dot(x.T,donn)
+'''
+A=np.array([[1,2,3],
+            [5,6,7],
+            [8,9,10]])
+
+ValProp, VecProp = np.linalg.eig(A)
+
+order=np.argsort(-ValProp, axis=0)
+ValProp1=ValProp[order]
+VecProp1=VecProp[:,order]
+
+
+A1=ValProp*VecProp
+A2=ValProp1*VecProp1
+#%%
+
+A1=A@VecProp
+A2=A@VecProp1
+
+'''
+
+
+#%%
+X_proj=(np.dot(donnCR.T,VecProp)).T
+
+#%%
+fig, ax = plt.subplots(1,1, figsize = (21, 8))
+
+for i in range(len(nomvilles)):
+    ax.plot(X_proj[0,i], X_proj[1,i], "*", label=nomvilles[i], markersize = 10)
+    ax.text(X_proj[0,i]+0.03, X_proj[1,i]+0.03, nomvilles[i], fontsize=14.5)
+    
+ax.set_xlabel("Component 1", fontsize=18)
+ax.set_ylabel("Component 2", fontsize=18)
+ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
+
+#ax.legend()
+fig.show()
+
+#%%
+
+B=np.corrcoef(VecProp[0],VecProp[1:])
+
+
+#%%
+Factor=1/(VecProp[:,0]**2+VecProp[:,1]**2)
+VecProp1=(np.sqrt(Factor)*VecProp.T).T
+print(VecProp1[:,0]**2+VecProp1[:,1]**2)
+
+#%%
+'''=========================================================='''
+''' code pour tracer les cercle des corrélations après avoir calculé 
+le vecteur de corrélation r en 2 Dimensions'''
+
+theta = np.linspace(0, 2*np.pi, 100)
+r = np.sqrt(1.0)
+
+x1 = r*np.cos(theta)
+x2 = r*np.sin(theta)
 
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
-mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juliet', 'Août','Septembre','Octobre','Novembre','Décembre']
 
-ax.plot(X_proj, label=nomvilles, markersize = 10, linestyle=":", marker=".");
+ax.plot(x1, x2)
+ax.set_aspect(1)
 
-ax.set_xticks(range(0,12),mois,rotation=45)
-ax.set_xlabel("Mois", fontsize=18)
-ax.set_ylabel("Projection de Température", fontsize=18)
-ax.set_title("Projection de Température vs Mois de chaque ville", fontsize=25)
+plt.xlim(-1.25,1.25)
+plt.ylim(-1.05,1.05)
 
-ax.legend()
-fig.show()
+plt.grid(linestyle='--')
 
-#%%
+r1=VecProp1[:,0]
+r2=VecProp1[:,1]
+
+plt.plot(r1,r2,'*k')
+
+for i in range(len(mois)):
+    plt.text(r1[i]*1.08,r2[i]*1.08,mois[i],va="center",ha="center",fontsize=14.5)
+    plt.plot(np.array([0,r1[i]]),np.array([0,r2[i]]), color="red", linewidth=0.5)
+    
+ax.set_xlabel("Component 1", fontsize=15)
+ax.set_ylabel("Component 2", fontsize=15)
+ax.set_title("Cercle des corrélations", fontsize=20)
+
+plt.savefig("plot_circle_matplotlib_01.png", bbox_inches='tight')
+plt.show()
 
 
-plt.matshow(np.corrcoef (X_proj))
+
