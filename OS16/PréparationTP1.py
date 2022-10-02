@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 #%%
 df=pd.read_csv('data/temp_et_coord_14villes.csv', sep = ';')
 donn=df.to_numpy()
+donn=donn[0:12]
 
 lista=[]
 for i in range(len(df.columns)):
@@ -20,6 +21,7 @@ df.columns=lista
 del lista
 
 nomvilles=df.columns
+
 
 #%%
 
@@ -40,11 +42,12 @@ ax.set_title("Ubicación de las ciudades Longitud y Latitud", fontsize=25)
 #ax.legend()
 fig.show()
 '''
+
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août','Septembre','Octobre','Novembre','Décembre']
 
-ax.plot(donn[0:12,:], label=nomvilles, markersize = 10, linestyle=":", marker=".");
+ax.plot(donn, label=nomvilles, markersize = 10, linestyle=":", marker=".");
 
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
@@ -55,9 +58,7 @@ ax.legend()
 fig.show()
 
 #%%
-#Puedo hacer todo esto 
 
-donn=donn[0:12]
 d,N=np.shape(donn)
 m=np.mean(donn,axis=1)
 donnC=(donn.T-m).T       #Donnes centres
