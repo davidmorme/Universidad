@@ -28,22 +28,6 @@ nomvilles=df.columns
 execfile('Graph_France.py')
 
 #%%
-'''
-fig, ax = plt.subplots(1,1, figsize = (21, 8))
-
-for i in range(len(nomvilles)):
-    ax.plot(donn[12,i], donn[13,i], "*", label=nomvilles[i], markersize = 10)
-    ax.text(donn[12,i]*1.002, donn[13,i]*1.002, nomvilles[i], fontsize=14.5)
-    
-ax.set_xlabel("Longitude", fontsize=18)
-ax.set_ylabel("Latitude", fontsize=18)
-ax.set_title("Ubicación de las ciudades Longitud y Latitud", fontsize=25)
-
-#ax.legend()
-fig.show()
-'''
-
-#%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 mois=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août','Septembre','Octobre','Novembre','Décembre']
 
@@ -53,6 +37,7 @@ ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
 ax.set_ylabel("Température", fontsize=18)
 ax.set_title("Température vs Mois de chaque ville", fontsize=25)
+ax.grid(linestyle='--')
 
 ax.legend()
 fig.show()
@@ -72,6 +57,7 @@ ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
 ax.set_ylabel("Température avec Centrer", fontsize=18)
 ax.set_title("Température avec Centrer vs Mois de chaque ville", fontsize=25)
+ax.grid(linestyle='--')
 
 ax.legend()
 fig.show()
@@ -97,6 +83,7 @@ ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
 ax.set_ylabel("Température avec Centrer et Reduit", fontsize=18)
 ax.set_title("Température avec Centrer et Reduit vs Mois de chaque ville", fontsize=25)
+ax.grid(linestyle='--')
 
 ax.legend()
 fig.show()
@@ -125,43 +112,22 @@ ax.set_yticks(np.arange(0,1.1,step=0.1),range(0,101,10))
 ax.set_xlabel("Valores propios", fontsize=18)
 ax.set_ylabel("Percentaje of importance (%)", fontsize=18)
 ax.set_title("Percentaje of importance of each valeur propes (component)", fontsize=25)
+ax.grid(linestyle='--')
 
 ax.legend()
 fig.show()
 
 #%%
-'''
-A=np.array([[1,2,3],
-            [5,6,7],
-            [8,9,10]])
-
-ValProp, VecProp = np.linalg.eig(A)
-
-order=np.argsort(-ValProp, axis=0)
-ValProp1=ValProp[order]
-VecProp1=VecProp[:,order]
-
-
-A1=ValProp*VecProp
-A2=ValProp1*VecProp1
-#%%
-
-A1=A@VecProp
-A2=A@VecProp1
-
-'''
-
-
-#%%
-X_proj=(np.dot(donnCR.T,VecProp)).T
+Y=VecProp[:,0:2].T@donnCR #Y es el conjunto de datos proyectado
 
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
 for i in range(len(nomvilles)):
-    ax.plot(X_proj[0,i], X_proj[1,i], "*", label=nomvilles[i], markersize = 10)
-    ax.text(X_proj[0,i]+0.03, X_proj[1,i]+0.03, nomvilles[i], fontsize=14.5)
-    
+    ax.plot(Y[0,i], Y[1,i], "*", label=nomvilles[i], markersize = 10)
+    ax.text(Y[0,i]+0.03, Y[1,i]+0.03, nomvilles[i], fontsize=14.5)
+
+ax.grid(linestyle='--')    
 ax.set_xlabel("Component 1", fontsize=18)
 ax.set_ylabel("Component 2", fontsize=18)
 ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
@@ -171,13 +137,7 @@ fig.show()
 
 #%%
 
-B=np.corrcoef(VecProp[0],VecProp[1:])
-
-
-#%%
-Factor=1/(VecProp[:,0]**2+VecProp[:,1]**2)
-VecProp1=(np.sqrt(Factor)*VecProp.T).T
-print(VecProp1[:,0]**2+VecProp1[:,1]**2)
+CoefCorr=np.sqrt(ValProp)*VecProp
 
 #%%
 '''=========================================================='''
@@ -190,24 +150,24 @@ r = np.sqrt(1.0)
 x1 = r*np.cos(theta)
 x2 = r*np.sin(theta)
 
-fig, ax = plt.subplots(1,1, figsize = (21, 8))
+fig, ax = plt.subplots(1,1, figsize = (10, 10))
 
-ax.plot(x1, x2)
+ax.plot(x1, x2, color="blue")
 ax.set_aspect(1)
 
-plt.xlim(-1.25,1.25)
-plt.ylim(-1.05,1.05)
+ax.set_xlim(-1.25,1.25)
+ax.set_ylim(-1.05,1.05)
 
-plt.grid(linestyle='--')
+ax.grid(linestyle='--')
 
-r1=VecProp1[:,0]
-r2=VecProp1[:,1]
+r1=CoefCorr[:,0]
+r2=CoefCorr[:,1]
 
-plt.plot(r1,r2,'*k')
+ax.plot(r1,r2,'*k')
 
 for i in range(len(mois)):
-    plt.text(r1[i]*1.08,r2[i]*1.08,mois[i],va="center",ha="center",fontsize=14.5)
-    plt.plot(np.array([0,r1[i]]),np.array([0,r2[i]]), color="red", linewidth=0.5)
+    ax.text(r1[i]*1.0,r2[i]*1.08,mois[i],va="center",ha="left",fontsize=14.5)
+    ax.plot(np.array([0,r1[i]]),np.array([0,r2[i]]), color="red", linewidth=0.5)
     
 ax.set_xlabel("Component 1", fontsize=15)
 ax.set_ylabel("Component 2", fontsize=15)
@@ -215,6 +175,3 @@ ax.set_title("Cercle des corrélations", fontsize=20)
 
 plt.savefig("plot_circle_matplotlib_01.png", bbox_inches='tight')
 plt.show()
-
-
-
