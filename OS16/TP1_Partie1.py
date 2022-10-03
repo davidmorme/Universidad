@@ -24,8 +24,25 @@ nomvilles=df.columns
 
 
 #%%
-
+'''
+#Este código solo corre en Python 3.9, explicación en ese archivo
 execfile('Graph_France.py')
+'''
+#%%
+
+fig, ax = plt.subplots(1,1, figsize = (10, 10))
+
+for i in range(len(nomvilles)):
+    ax.plot(df.iloc[12,i], df.iloc[13,i], "*", label=nomvilles[i], markersize = 15)
+    ax.text(df.iloc[12,i]*1.002, df.iloc[13,i]*1.002, nomvilles[i], fontsize=14.5, rotation=45)
+
+ax.grid(linestyle='--')
+ax.set_title("Ubicación de las ciudades Longitud y Latitud", fontsize=15)
+ax.set_xlabel("Longitude", fontsize=15)
+ax.set_ylabel("Latitude", fontsize=15)
+ax.set_ylim(42,51)
+ax.set_xlim(-5,10)
+plt.show()
 
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))

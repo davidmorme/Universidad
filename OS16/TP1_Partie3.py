@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 
 #%%
-def PCA2_1(donn):
+def PCA(donn):
     d,N=np.shape(donn)
     cov=np.matmul(donn,np.transpose(donn))/N #Matriz de covarianza
     
@@ -82,7 +82,7 @@ plt.show()
 
 #%%
 
-YA, CoefCorrA, mIA, SumAcumIA = PCA2_1(donnA)
+YA, CoefCorrA, mIA, SumAcumIA = PCA(donnA)
 #%%
 
 fig, ax = plt.subplots(1,1, figsize = (10, 1))
@@ -116,7 +116,7 @@ plt.show()
 
 #%%
 
-YB, CoefCorrB, mIB, SumAcumIB = PCA2_1(donnB)
+YB, CoefCorrB, mIB, SumAcumIB = PCA(donnB)
 #%%
 
 fig, ax = plt.subplots(1,1, figsize = (10, 1))
@@ -153,7 +153,7 @@ plt.show()
 
 #%%
 
-YC, CoefCorrC, mIC, SumAcumIC = PCA2_1(donnC)
+YC, CoefCorrC, mIC, SumAcumIC = PCA(donnC)
 #%%
 
 fig, ax = plt.subplots(1,1, figsize = (10, 1))
