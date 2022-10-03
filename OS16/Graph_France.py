@@ -21,7 +21,6 @@ del lista
 '''
 df1=df.iloc[12:,:].transpose()
 df1.columns=["Longitude","Latitude"]
-gdf = geopandas.GeoDataFrame(df1, geometry=geopandas.points_from_xy(df1.Longitude, df1.Latitude))
 
 world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 France=world[world.name == 'France']
@@ -39,5 +38,5 @@ ax.set_xlabel("Longitude", fontsize=15)
 ax.set_ylabel("Latitude", fontsize=15)
 plt.show()
 
-del df1, gdf, world, France
+del df1, world, France
 

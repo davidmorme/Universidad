@@ -137,7 +137,7 @@ fig.show()
 
 #%%
 
-CoefCorr=np.sqrt(ValProp)*VecProp
+CoefCorr=np.sqrt(ValProp)*VecProp/np.std(donnCR ,axis=1)[order]
 
 #%%
 '''=========================================================='''
