@@ -32,18 +32,19 @@ datos_entrenamiento=datos_entrenamiento.map(normalizar)
 datos_pruebas=datos_pruebas.map(normalizar)
 
 #Agregar a cache (usar memoria en lugar de disco, entrenamiento mas rapido)
-datos_entrenamiento = datos_entrenamiento.cache()
-datos_pruebas = datos_pruebas.cache()
+#datos_entrenamiento = datos_entrenamiento.cache()
+#datos_pruebas = datos_pruebas.cache()
 
-clases = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+clases = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 #%%
 
-Muestra=50000
+Muestra=5000
 donn=np.zeros((28*28,Muestra))
+etiquetas=np.zeros(Muestra)
 for i, (imagen, etiqueta) in enumerate(datos_entrenamiento.take(Muestra)):
   donn[:,i] = imagen.numpy().reshape(28*28)
-  
+  etiquetas[i] = clases[etiqueta]
 
 #%%
 def PCA(donn):
@@ -104,7 +105,9 @@ donn = donn[sdDonn != 0] # enlever les dimesnions où il y a une variance nulle
 sdDonn = np.std(donn,axis=1)
 m=np.mean(donn,axis=1)
 donn = ((donn.T-m) / sdDonn).T  
-
+#%%
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 Y, CoefCorr, mI, SumAcumI = PCA(donn)
 
 #%%
@@ -115,7 +118,7 @@ Cercle_corr(CoefCorr)
 
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
-ax.plot(Y[0], Y[1], "*", markersize = 10)
+ax.plot(Y[0], Y[1], ".", markersize = 10)
 
 ax.grid(linestyle='--')    
 ax.set_xlabel("Component 1", fontsize=18)
@@ -126,6 +129,23 @@ ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
 fig.show()
 
 #%%
+
+fig, ax = plt.subplots(1,1, figsize = (21, 8))
+
+for i in clases:
+    num = etiquetas==i
+    ax.plot(Y[0][num], Y[1][num], ".", markersize = 10, label = i)
+
+ax.grid(linestyle='--')    
+ax.set_xlabel("Component 1", fontsize=18)
+ax.set_ylabel("Component 2", fontsize=18)
+ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
+
+ax.legend()
+fig.show()
+#%%
+alpha=0.05
+limSup=sum(SumAcumI<1-alpha)
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
 
 ax.bar(range(1,len(mI)+1),mI)
@@ -136,6 +156,7 @@ ax.set_xlabel("Valores propios", fontsize=18)
 ax.set_ylabel("Percentaje of importance (%)", fontsize=18)
 ax.set_title("Percentaje of importance of each valeur propes (component)", fontsize=25)
 ax.grid(linestyle='--')
+ax.set_xlim((0,limSup))
 
 ax.legend()
 fig.show()
