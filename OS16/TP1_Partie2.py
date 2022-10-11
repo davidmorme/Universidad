@@ -96,6 +96,7 @@ def Cercle_corr(CoefCorr):
     ax.set_ylabel("Component 2", fontsize=15)
     ax.set_title("Cercle des corrélations", fontsize=20)
     
+    #plt.savefig("Cercle_corr.png", bbox_inches='tight')
     plt.show()
 
 #%%
@@ -123,9 +124,9 @@ ax.plot(Y[0], Y[1], ".", markersize = 10)
 ax.grid(linestyle='--')    
 ax.set_xlabel("Component 1", fontsize=18)
 ax.set_ylabel("Component 2", fontsize=18)
-ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
+ax.set_title("Représentation sur les deux premiers axes", fontsize=25)
 
-#ax.legend()
+#plt.savefig("Rep_2_axes.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -139,9 +140,11 @@ for i in clases:
 ax.grid(linestyle='--')    
 ax.set_xlabel("Component 1", fontsize=18)
 ax.set_ylabel("Component 2", fontsize=18)
-ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
+ax.set_title("Représentation sur les deux premiers axes", fontsize=25)
 
 ax.legend()
+
+#plt.savefig("Rep_2_axes_Col.png", bbox_inches='tight')
 fig.show()
 #%%
 alpha=0.05
@@ -152,11 +155,13 @@ ax.bar(range(1,len(mI)+1),mI)
 ax.plot(range(1,len(mI)+1),SumAcumI, color="red")
 
 ax.set_yticks(np.arange(0,1.1,step=0.1),range(0,101,10))
-ax.set_xlabel("Valores propios", fontsize=18)
+ax.set_xlabel("Valeurs propres", fontsize=18)
 ax.set_ylabel("Percentaje of importance (%)", fontsize=18)
-ax.set_title("Percentaje of importance of each valeur propes (component)", fontsize=25)
+ax.set_title("Pourcentage d'inertie pour axe (component)", fontsize=25)
 ax.grid(linestyle='--')
 ax.set_xlim((0,limSup))
 
 ax.legend()
+
+#plt.savefig("Pour_Inertie.png", bbox_inches='tight')
 fig.show()

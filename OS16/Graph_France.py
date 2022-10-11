@@ -36,9 +36,10 @@ for i in range(len(df1)):
     ax.text(df1.Longitude[i]*1.002, df1.Latitude[i]*1.002, df1.index[i], fontsize=14.5, rotation=45)
 
 ax.grid(linestyle='--')
-ax.set_title("Ubicación de las ciudades Longitud y Latitud", fontsize=15)
+ax.set_title("Représentation des villes dans l'espace longitude-latitude", fontsize=15)
 ax.set_xlabel("Longitude", fontsize=15)
 ax.set_ylabel("Latitude", fontsize=15)
+plt.savefig("Villes_Long_Lat.png", bbox_inches='tight')
 plt.show()
 
 del df1, world, France

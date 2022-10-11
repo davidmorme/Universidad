@@ -32,7 +32,8 @@ def PCA(donn):
     return Y, CoefCorr, mI, SumAcumI
 
 #%%
-def Cercle_corr(CoefCorr):
+def Cercle_corr(CoefCorr,iTitle):
+    Titles=["Cercle des corrélations avec les données brutes","Cercle des corrélations avec la coordonnée1/100","Cercle des corrélations avec les données normalisées"]
     theta = np.linspace(0, 2*np.pi, 100)
     r = np.sqrt(1.0)
     
@@ -60,8 +61,9 @@ def Cercle_corr(CoefCorr):
         
     ax.set_xlabel("Component 1", fontsize=15)
     ax.set_ylabel("Component 2", fontsize=15)
-    ax.set_title("Cercle des corrélations", fontsize=20)
+    ax.set_title(Titles[iTitle], fontsize=20)
     
+    #plt.savefig("Cercle_corr.png", bbox_inches='tight')
     plt.show()
 
 #%%
@@ -75,9 +77,11 @@ fig, ax = plt.subplots(1,1, figsize = (10, 10))
 ax.plot(donnA[0], donnA[1], ".", markersize = 15)
 
 ax.grid(linestyle='--')
-ax.set_title("Ubicación de los puntos en el espacio datos sin procesar", fontsize=15)
-ax.set_xlabel("Coordenada 1", fontsize=15)
-ax.set_ylabel("Coordenada 2", fontsize=15)
+ax.set_title("Emplacement des points dans l'espace des données brutes", fontsize=15)
+ax.set_xlabel("Coordonée 1", fontsize=15)
+ax.set_ylabel("Coordonée 2", fontsize=15)
+
+#plt.savefig("Donn_Brut.png", bbox_inches='tight')
 plt.show()
 
 #%%
@@ -90,13 +94,14 @@ fig, ax = plt.subplots(1,1, figsize = (10, 1))
 ax.plot(YA, np.zeros(12), ".", markersize = 15)
 
 ax.grid(linestyle='--')
-ax.set_title("Projection en le componente 1 datos sin procesar", fontsize=15)
-ax.set_xlabel("Componente 1", fontsize=15)
+ax.set_title("Projection sur les données brutes de la composante 1", fontsize=15)
+ax.set_xlabel("Component 1", fontsize=15)
 
+#plt.savefig("Proj_Donn_Brut.png", bbox_inches='tight')
 plt.show()
 
 #%%
-Cercle_corr(CoefCorrA)
+Cercle_corr(CoefCorrA,0)
 
 #%%
 '''########################### Partie B #########################'''
@@ -109,9 +114,11 @@ fig, ax = plt.subplots(1,1, figsize = (10, 10))
 ax.plot(donnB[0], donnB[1], ".", markersize = 15)
 
 ax.grid(linestyle='--')
-ax.set_title("Ubicación de los puntos en el espacio coordenada1/100", fontsize=15)
-ax.set_xlabel("Coordenada 1", fontsize=15)
-ax.set_ylabel("Coordenada 2", fontsize=15)
+ax.set_title("Emplacement des points dans l'espace de la coordonnée1/100", fontsize=15)
+ax.set_xlabel("Coordonée 1", fontsize=15)
+ax.set_ylabel("Coordonée 2", fontsize=15)
+
+#plt.savefig("Donn_Coor1_div_100.png", bbox_inches='tight')
 plt.show()
 
 #%%
@@ -124,13 +131,14 @@ fig, ax = plt.subplots(1,1, figsize = (10, 1))
 ax.plot(YB, np.zeros(12), ".", markersize = 15)
 
 ax.grid(linestyle='--')
-ax.set_title("Projection en le componente 1 coordenada1/100", fontsize=15)
-ax.set_xlabel("Componente 1", fontsize=15)
+ax.set_title("Projection sur les données brutes de la composante 1 coordonnée1/100", fontsize=15)
+ax.set_xlabel("Component 1", fontsize=15)
 
+#plt.savefig("Proj_Coor1_div_100.png", bbox_inches='tight')
 plt.show()
 
 #%%
-Cercle_corr(CoefCorrB)
+Cercle_corr(CoefCorrB,1)
 
 #%%
 '''########################### Partie C #########################'''
@@ -146,9 +154,11 @@ fig, ax = plt.subplots(1,1, figsize = (10, 10))
 ax.plot(donnC[0], donnC[1], ".", markersize = 15)
 
 ax.grid(linestyle='--')
-ax.set_title("Ubicación de los puntos en el espacio datos normalizados", fontsize=15)
-ax.set_xlabel("Coordenada 1", fontsize=15)
-ax.set_ylabel("Coordenada 2", fontsize=15)
+ax.set_title("Emplacement des points dans l'espace des données normalisées", fontsize=15)
+ax.set_xlabel("Coordonée 1", fontsize=15)
+ax.set_ylabel("Coordonée 2", fontsize=15)
+
+#plt.savefig("Donn_Norm.png", bbox_inches='tight')
 plt.show()
 
 #%%
@@ -161,10 +171,11 @@ fig, ax = plt.subplots(1,1, figsize = (10, 1))
 ax.plot(YC, np.zeros(12), ".", markersize = 15)
 
 ax.grid(linestyle='--')
-ax.set_title("Projection en le componente 1 datos normalizados", fontsize=15)
-ax.set_xlabel("Componente 1", fontsize=15)
+ax.set_title("Projection sur les données normalisées de la composante 1", fontsize=15)
+ax.set_xlabel("Component 1", fontsize=15)
 
+#plt.savefig("Proj_Donn_Norm.png", bbox_inches='tight')
 plt.show()
 
 #%%
-Cercle_corr(CoefCorrC)
+Cercle_corr(CoefCorrC,2)

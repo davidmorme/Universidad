@@ -37,7 +37,7 @@ for i in range(len(nomvilles)):
     ax.text(df.iloc[12,i]*1.002, df.iloc[13,i]*1.002, nomvilles[i], fontsize=14.5, rotation=45)
 
 ax.grid(linestyle='--')
-ax.set_title("Ubicación de las ciudades Longitud y Latitud", fontsize=15)
+ax.set_title("Représentation des villes dans l'espace longitude-latitude", fontsize=15)
 ax.set_xlabel("Longitude", fontsize=15)
 ax.set_ylabel("Latitude", fontsize=15)
 ax.set_ylim(42,51)
@@ -53,10 +53,11 @@ ax.plot(donn, label=nomvilles, markersize = 10, linestyle=":", marker=".");
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
 ax.set_ylabel("Température", fontsize=18)
-ax.set_title("Température vs Mois de chaque ville", fontsize=25)
+ax.set_title("Représentation de Température en fonction du mois", fontsize=25)
 ax.grid(linestyle='--')
 
 ax.legend()
+#plt.savefig("Temp_Mois.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -73,10 +74,11 @@ ax.plot(donnC, label=nomvilles, markersize = 10, linestyle=":", marker=".");
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
 ax.set_ylabel("Température avec Centrer", fontsize=18)
-ax.set_title("Température avec Centrer vs Mois de chaque ville", fontsize=25)
+ax.set_title("Représentation de Température centrées en fonction du mois", fontsize=25)
 ax.grid(linestyle='--')
 
 ax.legend()
+#plt.savefig("TempC_Mois.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -99,10 +101,11 @@ ax.plot(donnCR, label=nomvilles, markersize = 10, linestyle=":", marker=".");
 ax.set_xticks(range(0,12),mois,rotation=45)
 ax.set_xlabel("Mois", fontsize=18)
 ax.set_ylabel("Température avec Centrer et Reduit", fontsize=18)
-ax.set_title("Température avec Centrer et Reduit vs Mois de chaque ville", fontsize=25)
+ax.set_title("Représentation de Température centrées-réuites en fonction du mois", fontsize=25)
 ax.grid(linestyle='--')
 
 ax.legend()
+#plt.savefig("TempCR_Mois.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -128,10 +131,11 @@ ax.set_xticks(range(1,13))
 ax.set_yticks(np.arange(0,1.1,step=0.1),range(0,101,10))
 ax.set_xlabel("Valores propios", fontsize=18)
 ax.set_ylabel("Percentaje of importance (%)", fontsize=18)
-ax.set_title("Percentaje of importance of each valeur propes (component)", fontsize=25)
+ax.set_title("Pourcentage d'inertie pour axe (component)", fontsize=25)
 ax.grid(linestyle='--')
 
 ax.legend()
+#plt.savefig("Pour_Inertie.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -147,9 +151,10 @@ for i in range(len(nomvilles)):
 ax.grid(linestyle='--')    
 ax.set_xlabel("Component 1", fontsize=18)
 ax.set_ylabel("Component 2", fontsize=18)
-ax.set_title("Projection de les villes en les componentes 1 et 2", fontsize=25)
+ax.set_title("Représentation sur les deux premiers axes", fontsize=25)
 
 #ax.legend()
+#plt.savefig("Rep_2_axes.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -190,5 +195,5 @@ ax.set_xlabel("Component 1", fontsize=15)
 ax.set_ylabel("Component 2", fontsize=15)
 ax.set_title("Cercle des corrélations", fontsize=20)
 
-plt.savefig("plot_circle_matplotlib_01.png", bbox_inches='tight')
+#plt.savefig("Cercle_corr.png", bbox_inches='tight')
 plt.show()
