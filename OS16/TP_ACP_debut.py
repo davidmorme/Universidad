@@ -35,7 +35,6 @@ X = (temperatures.T - Xmoy).T;
 plt.figure()
 plt.plot(X)
 
-#%%
 N = X.shape[1]
 X2 = np.sqrt((np.sum(np.square(X),1))/N)
 X = X[X2 != 0] # enlever les dimesnions où il y a une variance nulle
@@ -45,7 +44,23 @@ X3 = (X.T / X2).T
 plt.figure()
 plt.plot(X3)
 cov=np.cov(X3, bias=True)
-#%%
+
+w, v = np.linalg.eig(cov)
+order=np.argsort(-w, axis=0)
+w=w[order]
+v=v[:,order]
+mI=w/np.sum(w)
+Y=v.T@X3
+CC=np.sqrt(w)*v
+r1=CC[:,0]
+r2=CC[:,1]
+
+plt.figure()
+plt.plot(mI)
+
+plt.figure()
+plt.plot(Y[0],Y[1],".")
+
 '''=========================================================='''
 ''' code pour tracer les cercle des corrélations après avoir calculé 
 le vecteur de corrélation r en 2 Dimensions'''
@@ -66,15 +81,11 @@ plt.ylim(-1.05,1.05)
 
 plt.grid(linestyle='--')
 
-r1=VecProp1[:,0]
-r2=VecProp1[:,1]
-
-plt.plot(r1,r2,'*k')
+plt.plot(r1,r2,'.')
 moisname =['Janv', 'Fév','Mars','Avril','Mai','Juin','Juillet','Aout', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 for i in range(len(moisname)):
     plt.text(r1[i]*1.08,r2[i]*1.08,moisname[i],va="center",ha="center",fontsize=14.5)
-    plt.plot(np.array([0,r1[i]]),np.array([0,r2[i]]), color="red", linewidth=0.5)
     
 
 plt.title('cercle des corrélations', fontsize=8)
