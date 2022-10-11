@@ -39,7 +39,7 @@ clases = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 #%%
 
-Muestra=5000
+Muestra=60000
 donn=np.zeros((28*28,Muestra))
 etiquetas=np.zeros(Muestra)
 for i, (imagen, etiqueta) in enumerate(datos_entrenamiento.take(Muestra)):
@@ -96,7 +96,7 @@ def Cercle_corr(CoefCorr):
     ax.set_ylabel("Component 2", fontsize=15)
     ax.set_title("Cercle des corrélations", fontsize=20)
     
-    #plt.savefig("Cercle_corr.png", bbox_inches='tight')
+    plt.savefig("Cercle_corr.png", bbox_inches='tight')
     plt.show()
 
 #%%
@@ -126,7 +126,7 @@ ax.set_xlabel("Component 1", fontsize=18)
 ax.set_ylabel("Component 2", fontsize=18)
 ax.set_title("Représentation sur les deux premiers axes", fontsize=25)
 
-#plt.savefig("Rep_2_axes.png", bbox_inches='tight')
+plt.savefig("Rep_2_axes.png", bbox_inches='tight')
 fig.show()
 
 #%%
@@ -144,7 +144,7 @@ ax.set_title("Représentation sur les deux premiers axes", fontsize=25)
 
 ax.legend()
 
-#plt.savefig("Rep_2_axes_Col.png", bbox_inches='tight')
+plt.savefig("Rep_2_axes_Col.png", bbox_inches='tight')
 fig.show()
 #%%
 alpha=0.05
@@ -163,5 +163,5 @@ ax.set_xlim((0,limSup))
 
 ax.legend()
 
-#plt.savefig("Pour_Inertie.png", bbox_inches='tight')
+plt.savefig("Pour_Inertie.png", bbox_inches='tight')
 fig.show()
