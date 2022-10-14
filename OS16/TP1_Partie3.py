@@ -23,13 +23,10 @@ def PCA(donn):
     VecProp=VecProp[:,order]
     mI=ValProp/np.sum(ValProp)
     SumAcumI=np.cumsum(mI)
-    if d > 2:
-        Y=VecProp[:,0:2].T@donn #Y es el conjunto de datos proyectado
-    else:
-        Y=VecProp[:,0].T@donn #Y es el conjunto de datos proyectado
+    Y=VecProp.T@donn #Y es el conjunto de datos proyectado
     CoefCorr=np.sqrt(ValProp)*VecProp/np.std(donn ,axis=1)[order]
     
-    return Y, CoefCorr, mI, SumAcumI
+    return Y, CoefCorr, mI, SumAcumI, ValProp, VecProp
 
 #%%
 def Cercle_corr(CoefCorr,iTitle):
@@ -86,12 +83,12 @@ plt.show()
 
 #%%
 
-YA, CoefCorrA, mIA, SumAcumIA = PCA(donnA)
+YA, CoefCorrA, mIA, SumAcumIA, ValPropA, VecPropA = PCA(donnA)
 #%%
 
 fig, ax = plt.subplots(1,1, figsize = (10, 1))
 
-ax.plot(YA, np.zeros(12), ".", markersize = 15)
+ax.plot(YA[0], np.zeros(12), ".", markersize = 15)
 
 ax.grid(linestyle='--')
 ax.set_title("Projection sur les données brutes de la composante 1", fontsize=15)
@@ -105,7 +102,7 @@ Cercle_corr(CoefCorrA,0)
 
 #%%
 '''########################### Partie B #########################'''
-donnB=donnA
+donnB=donnA.copy()
 donnB[0]=donnB[0]/100
 
 #%%
@@ -123,12 +120,12 @@ plt.show()
 
 #%%
 
-YB, CoefCorrB, mIB, SumAcumIB = PCA(donnB)
+YB, CoefCorrB, mIB, SumAcumIB, ValPropB, VecPropB = PCA(donnB)
 #%%
 
 fig, ax = plt.subplots(1,1, figsize = (10, 1))
 
-ax.plot(YB, np.zeros(12), ".", markersize = 15)
+ax.plot(YB[0], np.zeros(12), ".", markersize = 15)
 
 ax.grid(linestyle='--')
 ax.set_title("Projection sur les données brutes de la composante 1 coordonnée1/100", fontsize=15)
@@ -163,12 +160,12 @@ plt.show()
 
 #%%
 
-YC, CoefCorrC, mIC, SumAcumIC = PCA(donnC)
+YC, CoefCorrC, mIC, SumAcumIC, ValPropC, VecPropC = PCA(donnC)
 #%%
 
 fig, ax = plt.subplots(1,1, figsize = (10, 1))
 
-ax.plot(YC, np.zeros(12), ".", markersize = 15)
+ax.plot(YC[0], np.zeros(12), ".", markersize = 15)
 
 ax.grid(linestyle='--')
 ax.set_title("Projection sur les données normalisées de la composante 1", fontsize=15)

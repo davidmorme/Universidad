@@ -139,7 +139,7 @@ ax.legend()
 fig.show()
 
 #%%
-Y=VecProp[:,0:2].T@donnCR #Y es el conjunto de datos proyectado
+Y=VecProp.T@donnCR #Y es el conjunto de datos proyectado
 
 #%%
 fig, ax = plt.subplots(1,1, figsize = (21, 8))
