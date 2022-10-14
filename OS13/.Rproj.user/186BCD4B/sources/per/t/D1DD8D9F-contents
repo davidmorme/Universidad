@@ -44,10 +44,23 @@ log.likelihood= function(tetha){
 
 log.likelihood(c(1,2))
 
-Sol=nlm(f = log.likelihood, p = c(1,1))
+Sol=nlm(f = log.likelihood, p = c(1,1), hessian = TRUE)
 Sol #Code debe dar 1 o 2
 betaHat=Sol$estimate[1]
 lambdaHat=Sol$estimate[2]
+
+IHes=solve(Sol$hessian) #Inversa de la matriz hessian
+
+VarBeta=IHes[1,1]
+VarLambda=IHes[2,2]
+
+## Confidence interval with 95% of cofidence ##
+
+ConfBeta= betaHat+qnorm(1-0.05/2)*c(-sqrt(VarBeta),sqrt(VarBeta))
+ConfLambda= lambdaHat+qnorm(1-0.05/2)*c(-sqrt(VarLambda),sqrt(VarLambda))
+
+ConfBeta
+ConfLambda
 
 R=function(t){
   return(pweibull(t, shape = betaHat, scale = 1/lambdaHat,lower.tail = FALSE))
@@ -74,7 +87,28 @@ log.likelihood= function(tetha){
   return(-sum(log(l)))
 }
 
-Sol=nlm(f = log.likelihood, p = c(1.1,0.005))
+Sol=nlm(f = log.likelihood, p = c(1.1,0.05), hessian = TRUE)
 Sol #Code debe dar 1 o 2
 betaHat=Sol$estimate[1]
 lambdaHat=Sol$estimate[2]
+IHes=solve(Sol$hessian) #Inversa de la matriz hessian
+
+VarBeta=IHes[1,1]
+VarLambda=IHes[2,2]
+
+## Confidence interval with 95% of cofidence ##
+
+ConfBeta= betaHat+qnorm(1-0.05/2)*c(-sqrt(VarBeta),sqrt(VarBeta))
+ConfLambda= lambdaHat+qnorm(1-0.05/2)*c(-sqrt(VarLambda),sqrt(VarLambda))
+
+ConfBeta
+ConfLambda
+
+## Confidence interval with 90% of cofidence ##
+
+ConfBeta= betaHat+qnorm(1-0.1/2)*c(-sqrt(VarBeta),sqrt(VarBeta))
+ConfLambda= lambdaHat+qnorm(1-0.1/2)*c(-sqrt(VarLambda),sqrt(VarLambda))
+
+ConfBeta
+ConfLambda
+
