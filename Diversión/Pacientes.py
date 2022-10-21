@@ -73,4 +73,46 @@ Corre=dfPacientes.corr(method='pearson')
 fig, ax= plt.subplots(figsize=(10, 8))
 sns.heatmap(data=Corre, annot=True,cmap=plt.cm.Blues,vmin = 0.25, vmax = 1, square=True, ax=ax)
 
+#%%
 
+fig, ax= plt.subplots(figsize=(17, 7), sharex=True)
+
+dfA.plot(x='Fecha', y = ['Triage 1','Triage 2','Triage 3','Triage 4','Triage 5'],ax=ax)
+
+ax.set_title('Cantidad de pacientes', fontsize=15)
+ax.legend(fontsize=10)
+
+print('OK')
+
+#%%
+
+Corre=dfA[['Triage 1','Triage 2','Triage 3','Triage 4','Triage 5']].corr(method='pearson')
+
+fig, ax= plt.subplots(figsize=(10, 8))
+sns.heatmap(data=Corre, annot=True,cmap=plt.cm.Blues,vmin = 0, vmax = 1, square=True, ax=ax)
+
+
+#%%
+
+fig, ax= plt.subplots(figsize=(17, 7))
+
+ax.scatter(data=dfA, x='Triage 3', y='Triage 4', label='Triage 3-Triage 4')
+
+#%%
+
+dfPacientes['Total']=np.sum(dfPacientes, axis=1)
+
+Corre=dfA[['Triage 1','Triage 2','Triage 3','Triage 4','Triage 5','Total_Pacientes']].corr(method='pearson')
+
+fig, ax= plt.subplots(figsize=(10, 8))
+sns.heatmap(data=Corre, annot=True,cmap=plt.cm.Blues,vmin = 0, vmax = 1, square=True, ax=ax)
+
+
+#%%
+
+dfPacientes['Total']=np.sum(dfPacientes, axis=1)
+
+Corre=dfPacientes.corr(method='pearson')
+
+fig, ax= plt.subplots(figsize=(10, 8))
+sns.heatmap(data=Corre, annot=True,cmap=plt.cm.Blues,vmin = 0.25, vmax = 1, square=True, ax=ax)
