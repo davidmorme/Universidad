@@ -116,3 +116,16 @@ Corre=dfPacientes.corr(method='pearson')
 
 fig, ax= plt.subplots(figsize=(10, 8))
 sns.heatmap(data=Corre, annot=True,cmap=plt.cm.Blues,vmin = 0.25, vmax = 1, square=True, ax=ax)
+
+#%%
+
+fig, ax= plt.subplots(figsize=(17, 7))
+
+pd.plotting.autocorrelation_plot(dfPacientes['Total'], ax=ax, label='Todos')
+
+ax.set_title('Autocorrelación de cantidad de pacientes',fontsize=15)
+ax.legend(fontsize=10)
+#ax.set_xlim((0,15))
+
+#%%
+
