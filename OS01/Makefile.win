@@ -1,15 +1,15 @@
-# Project: E8
+# Project: E10
 # Makefile created by Embarcadero Dev-C++ 6.3
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = "main\ E8.o" compte.o
-LINKOBJ  = "main E8.o" compte.o
+OBJ      = "main\ E10.o"
+LINKOBJ  = "main E10.o"
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
-BIN      = E8.exe
+BIN      = E10.exe
 CXXFLAGS = $(CXXINCS) 
 CFLAGS   = $(INCS) 
 DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\devcpp.exe INTERNAL_DEL
@@ -24,8 +24,5 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-"main\ E8.o": main\ E8.cpp
-	$(CPP) -c "main E8.cpp" -o "main E8.o" $(CXXFLAGS)
-
-compte.o: compte.cpp
-	$(CPP) -c compte.cpp -o compte.o $(CXXFLAGS)
+"main\ E10.o": main\ E10.cpp
+	$(CPP) -c "main E10.cpp" -o "main E10.o" $(CXXFLAGS)

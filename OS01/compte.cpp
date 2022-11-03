@@ -1,6 +1,9 @@
 #include "compte.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
-compte::compte(string n, string t, double s=0, double d=0){
+compte::compte(string n, string t, double s, double d){
 	numero = n;
 	titulaire = t;
 	solde = s;
@@ -10,7 +13,12 @@ void compte::crediter(double montant){
 	solde += montant;
 }
 void compte::debiter(double montant){
-	solde -= montant;
+	if(solde - montant >= -decouvert){
+		solde -= montant;
+	}else{
+		cout << "Debito de "<< montant << " no permitido, saldo insuficiente"<< endl;
+	}
+	
 }
 void compte::afficher(){
 	cout << "Compte: " << numero << endl;

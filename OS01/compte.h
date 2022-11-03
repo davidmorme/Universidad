@@ -1,10 +1,10 @@
 #ifndef COMPTE_H
 #define COMPTE_H
-
+#include <string>
 using namespace std;
 
 class compte{
-	private:
+	protected:
 		string numero;
 		string titulaire;
 		double solde;
