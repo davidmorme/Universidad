@@ -15,7 +15,7 @@ def Int_Ext(xi,yi,x,y):
     cpt=0
     n=len(yi)-1
     
-    for i in range(n):    
+    for i in range(n):
         if xi[i]!=xi[i+1]:
             m=(yi[i+1]-yi[i])/(xi[i+1]-xi[i])
             p=yi[i]-m*xi[i]
@@ -127,25 +127,45 @@ xi=np.array([0.5,1,1,0,0])
 
 yi=np.array([0,0,1,1.5,1])
 xi=np.array([0,1,1,0.6,0])
-'''
+
 
 yi=np.array([0,0,1,0.9,1])
 xi=np.array([0,1,1,0.6,0])
+'''
+
+xi=np.array([2.2,3.4,4.1,5.6,10.11])
+yi=np.array([2.2,2.4,2.2,2.7,15.23])
+
 
 yi=np.concatenate((yi,yi[[0]]))
 xi=np.concatenate((xi,xi[[0]]))
 
 xi,yi=PuntInu(xi, yi)
         
-#print(perimeter(xi,yi))
-        
+print(perimeter(xi,yi))
+
+
+
 if regular(xi,yi):
     print('El polígono es regular')
 else:
     print('El polígono NO es regular')
 
 
+#%%
+i=3
+x1=xi[i-1]-xi[i]
+x2=xi[i+1]-xi[i]
 
+y1=yi[i-1]-yi[i]
+y2=yi[i+1]-yi[i]
+	
+	
+prodP = x1*x2 + y1*y2 
+mag1 = pow( pow(x1, 2) + pow(y1, 2) , 0.5)
+mag2 = pow( pow(x2, 2) + pow(y2, 2) , 0.5)
+	
+ang = np.arccos(prodP/(mag1*mag2))
 
 
 
