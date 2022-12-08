@@ -4,9 +4,9 @@ library(nortest)
 
 #### ESTIMATE THE DISTRIBUTION ####
 
-
+FailureTimes_5=read.csv('FailureTimes_5.csv',sep = ',')
 data=FailureTimes_5$Heures
-hist(data, freq = FALSE)
+hist(data, freq = FALSE,breaks = 9)
 
 
 #### Exponential distribution ####
@@ -15,7 +15,6 @@ ks.test(data,"pexp",rate=1/mean(data))
 
 hist(data, freq = FALSE, ylim = c(0,0.0002), main="Data avec exponential distribution")
 curve(dexp(x, rate = 1/mean(data)), from=0, to=max(data), col='blue', add=TRUE)
-?fitdistr
 
 #### Weibull distribution ####
 

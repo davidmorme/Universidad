@@ -6,7 +6,7 @@ library(nortest)
 
 FailureTimes_5=read.csv('FailureTimes_5.csv',sep = ',')
 data=FailureTimes_5$Heures
-hist(data, freq = FALSE)
+hist(data, freq = FALSE,breaks = 9)
 
 
 #### Exponential distribution ####
