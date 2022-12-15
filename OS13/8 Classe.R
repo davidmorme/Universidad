@@ -13,7 +13,7 @@ U=rexp(n*scenarios,rate=rateU)
 U=matrix(U,nrow = scenarios,ncol = n)
 
 
-rateD=1/mean(data)/0.5
+rateD=1/mean(data)/0.2
 
 set.seed(222)
 D=rexp(n*scenarios,rate=rateD)
@@ -45,8 +45,6 @@ for(i in 2:length(Disp)){
 }
 
 plot(t,Disp, type = "s")
-
-
 
 
 ##### Generic ####
