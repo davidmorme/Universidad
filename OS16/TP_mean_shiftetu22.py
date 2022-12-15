@@ -11,7 +11,7 @@ nu = Xu.shape[0]
 plt.figure(figsize=(7,5))
 plt.plot(Xu[:,0],Xu[:,1],'.b', markersize=3)
 plt.title('Data to classify')
-plt.savefig('Data_classify.png', dpi=100)
+plt.savefig('Data_classify.png', dpi=100, bbox_inches='tight', pad_inches=0.1)
 
 '''===================================='''
 # fonction pour déterminer le centre de gravite d'une ensemble de points 
@@ -59,14 +59,14 @@ plt.plot(suitepoints[-1,0],suitepoints[-1,1],'*r', markersize=4)
 
 #%%
 
-numero_pt = 19 #95 #19
+numero_pt = 95 #95 #19
 
 
 
-fig, ax = plt.subplots(4,2,figsize=(19,15))  
+fig, ax = plt.subplots(4,2,figsize=(15,15))  
 
 for i, epsilon in enumerate([10e-10,10e-1]):
-    for j, sigma in  enumerate([ 1, 5, 0.5, 0.1]):
+    for j, sigma in  enumerate([ 0.1, 0.5, 1, 5]):
         point = Xu[numero_pt,:]
         suitepoints = np.array ([point])
     
@@ -84,7 +84,8 @@ for i, epsilon in enumerate([10e-10,10e-1]):
         ax[j,i].plot(suitepoints[-1,0],suitepoints[-1,1],'*r', markersize=6)
         ax[j,i].set_title(f'Sigma {sigma} et epsilon {epsilon}')
 
-fig.suptitle(f'Mean-shift de point {numero_pt}', y=0.92, size=20)
+fig.suptitle(f'Mean-shift de point {numero_pt}', y=0.93, size=20)
+fig.savefig(f'Mean-shift de point {numero_pt}.png',bbox_inches='tight', pad_inches=0.1)
 #%%
 '''=============== meanshift pour un ensemble de points ====================='''
 # Recherche du point stationnaire pour chaque élément de l'ensemble Xu
@@ -128,11 +129,12 @@ for i in range(1,nu):
         classe[i] = np.argmin(dist)+1
 
 # tracé des points avec leur classe 
-plt.figure()
+fig, ax = plt.subplots(figsize=(7,5)) 
 colors = ['*r', '*b', '*k','*g', '*y', '*m']
 for i in range(K):
     index = classe==i+1
-    plt.plot(Xu[index,0], Xu[index,1], colors[i%6],markersize=3)
-    plt.plot(centres[i,0], centres[i,1],'.', color='cyan',markersize=10)
+    ax.plot(Xu[index,0], Xu[index,1], colors[i%6],markersize=3)
+    ax.plot(centres[i,0], centres[i,1],'.', color='cyan',markersize=10)
 
-
+fig.suptitle('Données classées avec leurs centres de gravité', y=0.94)
+fig.savefig('Données_classées.png',bbox_inches='tight', pad_inches=0.1, dpi=100)
