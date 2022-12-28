@@ -1,27 +1,27 @@
 {
-    "id": "CE3DDA04",
-    "path": "~/GitHub/Universidad/OS13/8 Classe.R",
-    "project_path": "8 Classe.R",
+    "id": "4B517235",
+    "path": "~/GitHub/Universidad/OS13/Homework 1.R",
+    "project_path": "Homework 1.R",
     "type": "r_source",
-    "hash": "2639708998",
+    "hash": "2678828094",
     "contents": "",
     "dirty": false,
-    "created": 1670512533863.0,
+    "created": 1672180312232.0,
     "source_on_save": false,
-    "relative_order": 8,
+    "relative_order": 10,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "49,0",
-        "scrollLine": "0"
+        "cursorPosition": "51,0",
+        "scrollLine": "35"
     },
     "folds": "",
-    "lastKnownWriteTime": 1671102922,
+    "lastKnownWriteTime": 1672185380,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1671102922153,
+    "last_content_update": 1672185380098,
     "read_only": false,
     "read_only_alternatives": []
 }
