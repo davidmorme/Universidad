@@ -85,5 +85,5 @@ log.likelihood= function(theta){
 log.likelihood(c(1,1))
 Sol=nlm(log.likelihood,c(0.5,0.05), hessian = TRUE)
 Sol #Code debe dar 1 o 2
-betaHat=Sol$par[1]
-lambdaHat=Sol$par[2]
+b0Hat=Sol$estimate[1]
+b1Hat=Sol$estimate[2]
