@@ -132,4 +132,4 @@ log.likelihood(c(beta0Hat,beta1Hat))
 exp(beta0Hat+beta1Hat*S0)
 1/exp(beta0Hat+beta1Hat*S0)
 
-1500*exp(beta0Hat+beta1Hat*S2)/exp(beta0Hat+beta1Hat*S0)
+1500*exp(beta0Hat+beta1Hat*S3)/exp(beta0Hat+beta1Hat*S0)

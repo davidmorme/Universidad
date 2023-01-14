@@ -56,9 +56,20 @@ reparation(10000)
 
 Disp=(scenarios-sapply(t,reparation))/scenarios
 
-plot(t,Disp, type = 'l' ,xlim=c(0, 5*10e3), ylim=c(0.5,1), main='Disponibilité de produit dans le temps')
+plot(t,Disp, type = 'l' ,xlim=c(0, 5*10e3), ylim=c(0.5,1), main='Disponibilité de produit dans le temps',ylab='A(t)')
 
 
 (1/rateU)/(1/rateU+1/rateD) #Debe converger a este valor.
 
+A=function(t){ #Products in reparation
+  1/(rateU+rateD)*(rateD+rateU*exp(-(rateD+rateU)*t))
+}
+As=sapply(t,A)
 
+plot(t,Disp, type = 'l' ,xlim=c(0, 5*10e3), ylim=c(0.7,1),col='blue', main='Disponibilité de produit dans le temps',ylab='A(t)')
+lines(t,As, type = 'l' , col='red', label='Valeur théorique')
+
+legend("topright", legend = c('Simulation Montecarlo',"Valeur théorique"),
+       lwd = 2, col = c('blue',"red"), bty = 'n')
+
+mean(abs(Disp[0:5000]-As[0:5000])/As[0:5000])

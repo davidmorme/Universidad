@@ -1,27 +1,27 @@
 {
-    "id": "EB2A503C",
-    "path": "~/GitHub/Universidad/OS13/2 Classe.R",
-    "project_path": "2 Classe.R",
+    "id": "C3994F97",
+    "path": "~/GitHub/Universidad/OS13/Homework 1.R",
+    "project_path": "Homework 1.R",
     "type": "r_source",
-    "hash": "9143115",
+    "hash": "505651370",
     "contents": "",
     "dirty": false,
-    "created": 1664460912666.0,
+    "created": 1673708493736.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 4,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "60,0",
-        "scrollLine": "0"
+        "cursorPosition": "135,0",
+        "scrollLine": "120"
     },
     "folds": "",
-    "lastKnownWriteTime": 1665499182,
+    "lastKnownWriteTime": 1673718407,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1665499182,
+    "last_content_update": 1673718407407,
     "read_only": false,
     "read_only_alternatives": []
 }

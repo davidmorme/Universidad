@@ -3,9 +3,9 @@
     "path": "~/GitHub/Universidad/OS13/7 Classe.R",
     "project_path": "7 Classe.R",
     "type": "r_source",
-    "hash": "555551756",
+    "hash": "3201338718",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1670333063156.0,
     "source_on_save": false,
     "relative_order": 7,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "6,0",
-        "scrollLine": "0"
+        "cursorPosition": "27,27",
+        "scrollLine": "25"
     },
     "folds": "",
-    "lastKnownWriteTime": 1670492635,
+    "lastKnownWriteTime": 1673722703,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1670512894510,
+    "last_content_update": 1673722703556,
     "read_only": false,
     "read_only_alternatives": []
 }
